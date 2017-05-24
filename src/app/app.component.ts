@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, ApplicationRef } from '@angular/core';
 
-import { Hero } from './hero';
+import { Hero } from './shared/hero';
 
 @Component({
-    moduleId: module.id,
+    //moduleId: module.id,
     selector: 'my-app',
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.css'],

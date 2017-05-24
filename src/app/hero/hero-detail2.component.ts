@@ -2,10 +2,10 @@
 
 import { Hero } from '../shared/hero';
 import { HeroDetailComponent } from './hero-detail.component';
-import { AppComponent } from '../shared/app.component';
+import { AppComponent } from '../app.component';
 
 @Component({
-    moduleId: module.id,
+    //moduleId: module.id,
     selector: 'my-hero-detail2',
     templateUrl: 'hero-detail2.component.html',
     styleUrls: ['hero-detail2.component.css'],
