@@ -1,15 +1,14 @@
-﻿import 'rxjs/add/operator/switchMap';
-import { Component, Input, /*Host,*/ ChangeDetectionStrategy, ChangeDetectorRef, ApplicationRef, NgZone } from '@angular/core';
+﻿import { Component, Input, /*Host,*/ ChangeDetectionStrategy, ChangeDetectorRef, ApplicationRef, NgZone } from '@angular/core';
 
 import { Hero } from '../shared/hero';
 import { AppComponent } from '../app.component';
 import { HeroDetailComponent } from './hero-detail.component';
 
 @Component({
-    //moduleId: module.id,
+    moduleId: module.id,
     selector: 'hero-detail2',
-    templateUrl: './hero-detail2.component.html',
-    styleUrls: ['./hero-detail2.component.css'],
+    templateUrl: 'hero-detail2.component.html',
+    styleUrls: ['hero-detail2.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroDetailComponent2 extends HeroDetailComponent {
