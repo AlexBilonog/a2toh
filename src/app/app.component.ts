@@ -1,3 +1,4 @@
+import 'rxjs/add/operator/switchMap';
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, ApplicationRef } from '@angular/core';
 
 import { Hero } from './shared/hero';
@@ -18,8 +19,8 @@ const HEROES: Hero[] = [
 @Component({
     //moduleId: module.id,
     selector: 'my-app',
-    templateUrl: 'app.component.html',
-    styleUrls: ['app.component.css'],
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {

@@ -1,4 +1,5 @@
-﻿import { Component, Input, /*Host,*/ ChangeDetectionStrategy } from '@angular/core';
+﻿import 'rxjs/add/operator/switchMap';
+import { Component, Input, /*Host,*/ ChangeDetectionStrategy } from '@angular/core';
 
 import { Hero } from '../shared/hero';
 import { AppComponent } from '../app.component';
@@ -6,8 +7,8 @@ import { AppComponent } from '../app.component';
 @Component({
     //moduleId: module.id,
     selector: 'hero-detail',
-    templateUrl: 'hero-detail.component.html',
-    styleUrls: ['hero-detail.component.css'],
+    templateUrl: './hero-detail.component.html',
+    styleUrls: ['./hero-detail.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroDetailComponent {
