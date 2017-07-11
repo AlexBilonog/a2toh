@@ -32,8 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="*" />
-    <Content Include="src\**" Exclude="**\*.js;**\*.js.map" />
+    <Content Include="*" Exclude="*.sln;*.proj;*.js;*.map;*.user;*.bak" />
+    <Content Include="src\**" Exclude="**\*.js;**\*.map;**\*.bak" />
     <Content Include="typings\**" />
   </ItemGroup>
   <ItemGroup>

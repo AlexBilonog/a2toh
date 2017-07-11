@@ -5,17 +5,15 @@ import { AppComponent } from '../app.component';
 
 @Component({
     //moduleId: module.id,
-    selector: 'my-hero-detail',
+    selector: 'hero-detail',
     templateUrl: 'hero-detail.component.html',
     styleUrls: ['hero-detail.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroDetailComponent {
-    @Input()
-    hero: Hero;
+    @Input() hero: Hero;
 
     constructor(
-        //@Host()
-        private app: AppComponent) {
+        /*@Host()*/ private app: AppComponent) {
     }
 }

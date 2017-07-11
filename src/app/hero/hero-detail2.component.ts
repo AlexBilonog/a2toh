@@ -1,23 +1,21 @@
 ﻿import { Component, Input, /*Host,*/ ChangeDetectionStrategy, ChangeDetectorRef, ApplicationRef, NgZone } from '@angular/core';
 
 import { Hero } from '../shared/hero';
-import { HeroDetailComponent } from './hero-detail.component';
 import { AppComponent } from '../app.component';
+import { HeroDetailComponent } from './hero-detail.component';
 
 @Component({
     //moduleId: module.id,
-    selector: 'my-hero-detail2',
+    selector: 'hero-detail2',
     templateUrl: 'hero-detail2.component.html',
     styleUrls: ['hero-detail2.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroDetailComponent2 extends HeroDetailComponent {
-    //@Input()
-    //hero: Hero;
+    //@Input() hero: Hero;
 
     constructor(
-        //@Host()
-        private heroDetail: HeroDetailComponent,
+        /*@Host()*/ private heroDetail: HeroDetailComponent,
         app: AppComponent,
         private appRef: ApplicationRef,
         private ref: ChangeDetectorRef,
