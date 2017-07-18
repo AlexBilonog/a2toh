@@ -1,7 +1,6 @@
 ﻿import { Component, Input, /*Host,*/ ChangeDetectionStrategy, ChangeDetectorRef, ApplicationRef, NgZone } from '@angular/core';
-
-import { Hero } from '../shared/hero';
-import { AppComponent } from '../app.component';
+import { Hero } from './hero';
+import { HeroesComponent } from './heroes.component';
 import { HeroDetailComponent } from './hero-detail.component';
 
 @Component({
@@ -16,12 +15,12 @@ export class HeroDetailComponent2 extends HeroDetailComponent {
 
     constructor(
         /*@Host()*/ private heroDetail: HeroDetailComponent,
-        app: AppComponent,
+        heroesComponent: HeroesComponent,
         private appRef: ApplicationRef,
         private ref: ChangeDetectorRef,
         private zone: NgZone) {
 
-        super(app);
+        super(heroesComponent);
 
         setInterval(() => {
             //(<any>this.appRef).changeDetectorRefs

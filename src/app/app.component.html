@@ -1,3 +1,4 @@
+
 <!--
 <h1 style="opacity: 1" [ngStyle]="{'font-size': 14}">1</h1>
 <h1 style="opacity: 1" [ngStyle]="{'font-size': 14, 'color': 'red'}">2</h1>
@@ -13,7 +14,6 @@
         <span class="badge">{{hero.id + 1}}</span> {{hero.name + 1}}
     </li>
 </template>-->
-
 Styles:
 <label style="opacity: 1" [style.font-size]="14">label 1</label>
 <label style="opacity: 1" [style.font-size]="14" [style.color]="'red'">label 1</label>
@@ -24,15 +24,4 @@ Classes:
 
 <h1>{{title}}</h1>
 
-<h2>My Heroes</h2>
-
-<ul class="heroes">
-    <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
-        <span class="badge">{{hero.id}}</span> {{hero.name}}
-    </li>
-</ul>
-
-<hero-detail style="float: left; width: 25%" [hero]="selectedHero"></hero-detail>
-<hero-detail style="float: left; width: 25%" [hero]="selectedHero"></hero-detail>
-<hero-detail style="float: left; width: 25%" [hero]="selectedHero"></hero-detail>
-<hero-detail style="float: left; width: 25%" [hero]="selectedHero"></hero-detail>
+<heroes></heroes>

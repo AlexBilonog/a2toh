@@ -1,7 +1,6 @@
 ﻿import { Component, Input, /*Host,*/ ChangeDetectionStrategy } from '@angular/core';
-
-import { Hero } from '../shared/hero';
-import { AppComponent } from '../app.component';
+import { Hero } from './hero';
+import { HeroesComponent } from './heroes.component';
 
 @Component({
     moduleId: module.id,
@@ -14,6 +13,6 @@ export class HeroDetailComponent {
     @Input() hero: Hero;
 
     constructor(
-        /*@Host()*/ private app: AppComponent) {
+        /*@Host()*/ private app: HeroesComponent) {
     }
 }
