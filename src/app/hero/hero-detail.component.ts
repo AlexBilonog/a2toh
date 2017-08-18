@@ -1,18 +1,34 @@
-﻿import { Component, Input, /*Host,*/ ChangeDetectionStrategy } from '@angular/core';
+﻿import { Component, OnInit/*, ChangeDetectionStrategy*/ } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Location } from '@angular/common';
+import 'rxjs/add/operator/switchMap';
 import { Hero } from './hero';
-import { HeroesComponent } from './heroes.component';
+import { HeroService } from './hero.service';
 
 @Component({
     moduleId: module.id,
     selector: 'hero-detail',
     templateUrl: 'hero-detail.component.html',
     styleUrls: ['hero-detail.component.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    //changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeroDetailComponent {
-    @Input() hero: Hero;
+export class HeroDetailComponent implements OnInit {
+    hero: Hero;
 
     constructor(
-        /*@Host()*/ private app: HeroesComponent) {
+        private heroService: HeroService,
+        private route: ActivatedRoute,
+        private location: Location
+    ) {
+    }
+
+    ngOnInit() {
+        this.route.paramMap
+            .switchMap((params: ParamMap) => this.heroService.getHero(+params.get('id')))
+            .subscribe(r => this.hero = r);
+    }
+
+    goBack() {
+        this.location.back();
     }
 }

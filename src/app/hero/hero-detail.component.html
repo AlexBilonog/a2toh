@@ -1,5 +1,5 @@
 <div *ngIf="hero" style="border: 1px solid black; margin: 10px; padding: 10px">
-    <h2>{{hero.name}} details 1!</h2>
+    <h2>{{hero.name}} details!</h2>
 
     <div>
         <label>Id: </label>
@@ -11,18 +11,7 @@
         <input [(ngModel)]="hero.name" placeholder="name">
     </div>
 
-    <div>
-        <label (click)="app.onSelect(app.heroes[0])">Total count: </label>
-        {{app.heroes.length}}
-
-        <!--<h1 [title]="hero.name">Mouse over to title</h1>
-
-        <h1 ng-attr-title="{{hero.name}}">Mouse over to title</h1>
-
-        <h1 title="{{hero.name}}">Mouse over to title</h1>
-
-        <h1 [attr.aria-title]="hero.name">Mouse over to title</h1>-->
-    </div>
-
     <hero-detail2 [hero]="hero"></hero-detail2>
+
+    <button (click)="goBack()">Back</button>
 </div>

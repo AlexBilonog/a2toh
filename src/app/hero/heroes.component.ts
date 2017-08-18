@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ApplicationRef } from '@angular/core';
+import { Component, OnInit, /*ChangeDetectorRef,*/ ApplicationRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
 
@@ -6,17 +7,16 @@ import { HeroService } from './hero.service';
     moduleId: module.id,
     selector: 'heroes',
     templateUrl: 'heroes.component.html',
-    styleUrls: ['heroes.component.css'],
-    //providers: [HeroService],
-    changeDetection: ChangeDetectionStrategy.Default
+    styleUrls: ['heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
     heroes: Hero[];
     selectedHero: Hero;
 
     constructor(
+        private router: Router,
         private heroService: HeroService,
-        private ref: ChangeDetectorRef,
+        //private ref: ChangeDetectorRef,
         private appRef: ApplicationRef) {
     }
 
@@ -31,5 +31,9 @@ export class HeroesComponent implements OnInit {
         //this.ref.detach();
         //this.ref.markForCheck();
         //this.ref.reattach();
+    }
+
+    goToDetail() {
+        this.router.navigate(['/detail', this.selectedHero.id]);
     }
 }

@@ -1,27 +1,8 @@
-
-<!--
-<h1 style="opacity: 1" [ngStyle]="{'font-size': 14}">1</h1>
-<h1 style="opacity: 1" [ngStyle]="{'font-size': 14, 'color': 'red'}">2</h1>
-
-<h1 class="default" [ngClass]="{'active-no': true}">1</h1>
-<h1 class="default" [ngClass]="{active: true, disabled: true}">2</h1>-->
-<!--<template ngFor let-hero [ngForOf]="heroes">
-    <li>
-        <span class="badge">{{hero.id}}</span> {{hero.name}}
-    </li>
-    +
-    <li>
-        <span class="badge">{{hero.id + 1}}</span> {{hero.name + 1}}
-    </li>
-</template>-->
-Styles:
-<label style="opacity: 1" [style.font-size]="14">label 1</label>
-<label style="opacity: 1" [style.font-size]="14" [style.color]="'red'">label 1</label>
-
-Classes:
-<label class="default" [class.active]="true">label 2</label>
-<label class="default" [class.active]="true" [class.disabled]="true">label 2</label>
-
 <h1>{{title}}</h1>
 
-<heroes></heroes>
+<nav>
+    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+    <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
+</nav>
+
+<router-outlet></router-outlet>
