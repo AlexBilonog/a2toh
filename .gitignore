@@ -1,7 +1,7 @@
 .idea
 node_modules
 jspm_packages
-npm-debug.log
+npm-debug.log*
 debug.log
 src/**/*.js
 !src/systemjs.config.extras.js
