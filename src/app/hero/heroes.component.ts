@@ -1,4 +1,4 @@
-import { Component, OnInit, /*ChangeDetectorRef,*/ ApplicationRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
@@ -15,9 +15,7 @@ export class HeroesComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private heroService: HeroService,
-        //private ref: ChangeDetectorRef,
-        private appRef: ApplicationRef) {
+        private heroService: HeroService) {
     }
 
     ngOnInit() {
@@ -26,11 +24,6 @@ export class HeroesComponent implements OnInit {
 
     onSelect(hero: Hero) {
         this.selectedHero = hero;
-
-        //this.appRef.tick();
-        //this.ref.detach();
-        //this.ref.markForCheck();
-        //this.ref.reattach();
     }
 
     goToDetail() {

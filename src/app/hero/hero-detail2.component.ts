@@ -1,4 +1,4 @@
-﻿import { Component, Input, /*Host,*/ ChangeDetectionStrategy, ChangeDetectorRef, ApplicationRef, NgZone } from '@angular/core';
+﻿import { Component, Input, /*Host,*/ ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Hero } from './hero';
@@ -19,20 +19,8 @@ export class HeroDetailComponent2 extends HeroDetailComponent {
         heroService: HeroService,
         route: ActivatedRoute,
         location: Location,
-
-        /*@Host()*/ private heroDetail: HeroDetailComponent,
-        private appRef: ApplicationRef,
-        private ref: ChangeDetectorRef,
-        private zone: NgZone) {
+        /*@Host()*/ private heroDetail: HeroDetailComponent) {
 
         super(heroService, route, location);
-
-        setInterval(() => {
-            //(<any>this.appRef).changeDetectorRefs
-            //    .forEach((ref) => ref.detectChanges());
-            //this.appRef..markForCheck();
-
-            //this.zone.run(() => this.tick());
-        }, 2000);
     }
 }
