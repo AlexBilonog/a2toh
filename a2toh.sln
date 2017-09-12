@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a2toh", "Web\a2toh.csproj", "{06CFED13-BADE-4B2E-833B-CF2E65227E63}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a2toh.Web", "a2toh.Web\a2toh.Web.csproj", "{06CFED13-BADE-4B2E-833B-CF2E65227E63}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a2toh.WebAPI", "a2toh.WebAPI\a2toh.WebAPI.csproj", "{997E2602-F433-41E9-B8BF-9B35F1A942C9}"
 EndProject
