@@ -2,16 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <!--<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>-->
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
   </PropertyGroup>
 
-  <ItemGroup>
+  <!--<ItemGroup>
     <Folder Include="wwwroot\" />
-  </ItemGroup>
+  </ItemGroup>-->
 
   <ItemGroup>
-    <Content Include="*" Exclude="*.sln;*.proj;*.js;*.map;*.user;*.bak;*.log.*;" />
-    <Content Include="src\**" Exclude="**\*.js;**\*.map;**\*.bak;node_modules\**" />
-    <Content Include="typings\**" />
+    <Content Remove="**\*.js;**\*.map" />
   </ItemGroup>
 
   <ItemGroup>
