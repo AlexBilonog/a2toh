@@ -2,16 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <!--<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>-->
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <DefaultItemExcludes>node_modules/**;wwwroot/node_modules/**;$(DefaultItemExcludes)</DefaultItemExcludes>
   </PropertyGroup>
 
-  <!--<ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>-->
+  <ItemGroup>
+    <Content Remove="**/*.js;**/*.map" />
+    <None Remove="*.log.*" />
+  </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="**\*.js;**\*.map" />
+    <Content Include="wwwroot/systemjs.config3.js" />
+    <Content Include="wwwroot/systemjs.config.js" />
+    <Content Include="wwwroot/systemjs-angular-loader.js" />
   </ItemGroup>
 
   <ItemGroup>

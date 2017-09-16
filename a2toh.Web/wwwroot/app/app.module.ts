@@ -16,6 +16,13 @@ import { HeroDetailComponent2 } from './hero/hero-detail2.component';
 import { HeroService } from './hero/hero.service';
 import { HeroSearchComponent } from './hero/hero-search.component';
 
+import { RemoteDataGridComponent } from './grid/remote-data-grid.component';
+import { EditService } from './grid/edit.service';
+
+import { ButtonsModule } from '@progress/kendo-angular-buttons';
+import { GridModule } from '@progress/kendo-angular-grid';
+import { JsonpModule } from '@angular/http';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -23,6 +30,9 @@ import { HeroSearchComponent } from './hero/hero-search.component';
         AppRoutingModule,
         HttpModule,
         InMemoryWebApiModule.forRoot(InMemoryDataService),
+        ButtonsModule,
+        GridModule,
+        JsonpModule
     ],
     declarations: [
         AppComponent,
@@ -30,10 +40,13 @@ import { HeroSearchComponent } from './hero/hero-search.component';
         HeroesComponent,
         HeroDetailComponent,
         HeroDetailComponent2,
-        HeroSearchComponent
+        HeroSearchComponent,
+
+        RemoteDataGridComponent
     ],
     providers: [
-        HeroService
+        HeroService,
+        EditService
     ],
     bootstrap: [AppComponent]
 })
