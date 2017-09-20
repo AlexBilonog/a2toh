@@ -21,7 +21,7 @@ const itemIndex = (item: any, data: any[]): number => {
 const cloneData = (data: any[]) => data.map(item => Object.assign({}, item));
 
 @Injectable()
-export class EditService extends BehaviorSubject<any[]> {
+export class GridService extends BehaviorSubject<any[]> {
     constructor(private jsonp: Jsonp) {
         super([]);
     }
@@ -33,9 +33,9 @@ export class EditService extends BehaviorSubject<any[]> {
     private deletedItems: any[] = [];
 
     public read() {
-        if (this.data.length) {
-            return super.next(this.data);
-        }
+        //if (this.data.length) {
+        //    return super.next(this.data);
+        //}
 
         this.fetch()
             .do(data => this.data = data)
@@ -113,7 +113,11 @@ export class EditService extends BehaviorSubject<any[]> {
 
         this.reset();
 
-        Observable.zip(Observable, ...completed).subscribe(() => { this.read(); });
+        console.log(new Date().toISOString());
+        Observable.zip(...completed).subscribe(() => {
+            console.log(new Date().toISOString());
+            this.read();
+        });
     }
 
     public cancelChanges(): void {

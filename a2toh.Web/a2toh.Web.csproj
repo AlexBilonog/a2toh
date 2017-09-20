@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot/systemjs.config3.js" />
     <Content Include="wwwroot/systemjs.config.js" />
     <Content Include="wwwroot/systemjs-angular-loader.js" />
   </ItemGroup>

@@ -17,7 +17,7 @@ import { HeroService } from './hero/hero.service';
 import { HeroSearchComponent } from './hero/hero-search.component';
 
 import { RemoteDataGridComponent } from './grid/remote-data-grid.component';
-import { EditService } from './grid/edit.service';
+import { GridService } from './shared/grid.service';
 
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { GridModule } from '@progress/kendo-angular-grid';
@@ -46,7 +46,7 @@ import { JsonpModule } from '@angular/http';
     ],
     providers: [
         HeroService,
-        EditService
+        GridService
     ],
     bootstrap: [AppComponent]
 })
