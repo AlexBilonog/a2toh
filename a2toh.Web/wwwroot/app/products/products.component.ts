@@ -4,9 +4,9 @@ import { Product } from './product';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'remote-data-grid.component.html'
+    templateUrl: 'products.component.html'
 })
-export class RemoteDataGridComponent implements OnInit {
+export class ProductsComponent implements OnInit {
     public gridView: Observable<GridDataResult>;
     public gridState: State = { sort: [], skip: 0, take: 10 };
 
@@ -15,7 +15,7 @@ export class RemoteDataGridComponent implements OnInit {
     }
 
     public ngOnInit() {
-        this.gridView = this.gridService.map((data: any) => process(data, this.gridState)); // TODO: move on server
+        this.gridView = this.gridService.map(data => process(data, this.gridState)); // TODO: move on server
         this.gridService.read();
     }
 

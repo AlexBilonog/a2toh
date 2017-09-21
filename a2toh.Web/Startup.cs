@@ -29,6 +29,14 @@ namespace a2toh.Web
             }
 
             app.UseStaticFiles();
+            //app.UseStaticFiles(new StaticFileOptions
+            //{
+            //    OnPrepareResponse = options =>
+            //    {
+            //        var durationInSeconds = 86400;
+            //        options.Context.Response.Headers["Cache-Control"] = "public,max-age=" + durationInSeconds;
+            //    }
+            //});
 
             app.UseMvc(routes =>
             {

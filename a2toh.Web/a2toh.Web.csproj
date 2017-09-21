@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="**/*.js;**/*.map" />
+    <Content Remove="**/*.js;**/*.map;**/*.bak" />
     <None Remove="*.log.*" />
   </ItemGroup>
 
@@ -23,5 +23,13 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="iisreset /stop" />
+  </Target>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="iisreset /start" />
+  </Target>
 
 </Project>

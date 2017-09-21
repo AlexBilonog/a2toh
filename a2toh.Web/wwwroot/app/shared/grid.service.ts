@@ -22,15 +22,15 @@ const cloneData = (data: any[]) => data.map(item => Object.assign({}, item));
 
 @Injectable()
 export class GridService extends BehaviorSubject<any[]> {
-    constructor(private jsonp: Jsonp) {
-        super([]);
-    }
-
     private data: any[] = [];
     private originalData: any[] = [];
     private createdItems: any[] = [];
     private updatedItems: any[] = [];
     private deletedItems: any[] = [];
+
+    constructor(private jsonp: Jsonp) {
+        super([]);
+    }
 
     public read() {
         //if (this.data.length) {

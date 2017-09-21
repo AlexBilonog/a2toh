@@ -7,6 +7,10 @@ import { AppRoutingModule } from './app-routing.module';
 // Imports for loading & configuring the in-memory web api
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
+import { ButtonsModule } from '@progress/kendo-angular-buttons';
+import { GridModule } from '@progress/kendo-angular-grid';
+import { JsonpModule } from '@angular/http';
+import { GridService } from './shared/grid.service';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './hero/dashboard.component';
@@ -15,13 +19,7 @@ import { HeroDetailComponent } from './hero/hero-detail.component';
 import { HeroDetailComponent2 } from './hero/hero-detail2.component';
 import { HeroService } from './hero/hero.service';
 import { HeroSearchComponent } from './hero/hero-search.component';
-
-import { RemoteDataGridComponent } from './grid/remote-data-grid.component';
-import { GridService } from './shared/grid.service';
-
-import { ButtonsModule } from '@progress/kendo-angular-buttons';
-import { GridModule } from '@progress/kendo-angular-grid';
-import { JsonpModule } from '@angular/http';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
     imports: [
@@ -41,8 +39,7 @@ import { JsonpModule } from '@angular/http';
         HeroDetailComponent,
         HeroDetailComponent2,
         HeroSearchComponent,
-
-        RemoteDataGridComponent
+        ProductsComponent
     ],
     providers: [
         HeroService,

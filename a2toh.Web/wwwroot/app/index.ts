@@ -13,6 +13,12 @@ import * as query from '@progress/kendo-data-query';
 export class Observable<T> extends rx.Observable<T> { }
 
 export var Component = core.Component;
+//export var Component = function (component: core.Component) {
+//    component.moduleId = module.id;
+//    console.log(arguments);
+//    debugger;
+//    return core.Component(component);
+//}
 export interface OnInit extends core.OnInit { }
 
 export class Validators extends forms.Validators { }
@@ -23,6 +29,7 @@ export interface GridDataResult extends grid.GridDataResult { }
 export interface State extends query.State { }
 export var process = query.process;
 
+// Actually not needed, but not include FormBuilder into providers
 exports.Observable = rx.Observable;
 
 exports.Component = core.Component;
