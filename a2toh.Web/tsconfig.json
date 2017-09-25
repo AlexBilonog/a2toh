@@ -11,7 +11,8 @@
     "suppressImplicitAnyIndexErrors": true
   },
   "exclude": [ "bin", "node_modules", "wwwroot/node_modules" ],
-  "atom": { "rewriteTsconfig": false }
+  "atom": { "rewriteTsconfig": false },
+  "compileOnSave": true
 }
 //{
 //  "compilerOptions": {

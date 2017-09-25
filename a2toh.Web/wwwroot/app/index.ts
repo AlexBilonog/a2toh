@@ -27,7 +27,7 @@ export class FormBuilder extends forms.FormBuilder { }
 export interface GridDataResult extends grid.GridDataResult { }
 
 export interface State extends query.State { }
-export var process = query.process;
+//export var process = query.process;
 
 // Actually not needed, but not include FormBuilder into providers
 exports.Observable = rx.Observable;
@@ -41,4 +41,4 @@ exports.FormBuilder = forms.FormBuilder;
 //exports.GridDataResult = grid.GridDataResult;
 
 //exports.State = query.State;
-exports.process = query.process;
+//exports.process = query.process;

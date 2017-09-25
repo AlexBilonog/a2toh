@@ -1,4 +1,4 @@
-﻿import { Observable, Component, OnInit, Validators, FormBuilder, GridDataResult, State, process } from '../index';
+﻿import { Component, /*Observable,*/ OnInit, Validators, FormBuilder, GridDataResult, State } from '../index';
 import { GridService } from '../shared/grid.service';
 import { Product } from './product';
 
@@ -7,21 +7,20 @@ import { Product } from './product';
     templateUrl: 'products.component.html'
 })
 export class ProductsComponent implements OnInit {
-    public gridView: Observable<GridDataResult>;
-    public gridState: State = { sort: [], skip: 0, take: 10 };
+    public gridView: GridDataResult; // Observable<GridDataResult>;
+    public gridState: State = { skip: 0, take: 10 };
 
     constructor(private formBuilder: FormBuilder, public gridService: GridService) {
         this.createFormGroup = this.createFormGroup.bind(this); // TODO: do automatically
     }
 
     public ngOnInit() {
-        this.gridView = this.gridService.map(data => process(data, this.gridState)); // TODO: move on server
-        this.gridService.read();
+        this.onStateChange(this.gridState);
     }
 
     public onStateChange(state: State) {
         this.gridState = state;
-        this.gridService.read();
+        this.gridService.fetch(this.gridState).subscribe(r => this.gridView = r);
     }
 
     public createFormGroup(args: any) {

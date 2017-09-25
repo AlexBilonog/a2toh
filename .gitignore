@@ -11,3 +11,4 @@ bin
 obj
 *.bak
 *.user
+.nuget/install.bat

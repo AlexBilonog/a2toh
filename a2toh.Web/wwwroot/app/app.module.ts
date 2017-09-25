@@ -5,12 +5,13 @@ import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 // Imports for loading & configuring the in-memory web api
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
+//import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+//import { InMemoryDataService } from './in-memory-data.service';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { JsonpModule } from '@angular/http';
 import { GridService } from './shared/grid.service';
+import { Grid2Service } from './shared/grid2.service';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './hero/dashboard.component';
@@ -27,7 +28,7 @@ import { ProductsComponent } from './products/products.component';
         FormsModule,
         AppRoutingModule,
         HttpModule,
-        InMemoryWebApiModule.forRoot(InMemoryDataService),
+        //InMemoryWebApiModule.forRoot(InMemoryDataService),
         ButtonsModule,
         GridModule,
         JsonpModule
@@ -43,7 +44,8 @@ import { ProductsComponent } from './products/products.component';
     ],
     providers: [
         HeroService,
-        GridService
+        GridService,
+        Grid2Service
     ],
     bootstrap: [AppComponent]
 })
