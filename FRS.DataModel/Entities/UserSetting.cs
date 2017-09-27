@@ -6,8 +6,8 @@ namespace FRS.DataModel.Entities
 {
     public partial class UserSetting : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
-        public int UserID { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
         public string Key { get; set; }
         public string Value { get; set; }
 
@@ -19,7 +19,7 @@ namespace FRS.DataModel.Entities
             {
                 entity.HasOne(d => d.User)
                     .WithMany()
-                    .HasForeignKey(d => d.UserID)
+                    .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

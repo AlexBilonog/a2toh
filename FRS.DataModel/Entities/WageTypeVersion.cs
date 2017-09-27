@@ -6,11 +6,11 @@ namespace FRS.DataModel.Entities
 {
     public partial class WageTypeVersion : AuditInfo, IEntity, IHasId, IHasDescription
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Description { get; set; }
-        public int EventTypeVersionID { get; set; }
-        public int? SystemWageTypeID { get; set; }
-        public int WageTypeID { get; set; }
+        public int EventTypeVersionId { get; set; }
+        public int? SystemWageTypeId { get; set; }
+        public int WageTypeId { get; set; }
 
         public EventTypeVersion EventTypeVersion { get; set; }
         public SystemWageType SystemWageType { get; set; }
@@ -22,16 +22,16 @@ namespace FRS.DataModel.Entities
             {
                 entity.HasOne(d => d.EventTypeVersion)
                     .WithMany(p => p.WageTypeVersions)
-                    .HasForeignKey(d => d.EventTypeVersionID)
+                    .HasForeignKey(d => d.EventTypeVersionId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.SystemWageType)
                     .WithMany(p => p.WageTypeVersions)
-                    .HasForeignKey(d => d.SystemWageTypeID);
+                    .HasForeignKey(d => d.SystemWageTypeId);
 
                 entity.HasOne(d => d.WageType)
                     .WithMany(p => p.WageTypeVersions)
-                    .HasForeignKey(d => d.WageTypeID)
+                    .HasForeignKey(d => d.WageTypeId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

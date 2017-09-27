@@ -57,16 +57,16 @@ namespace FRS.Common
             var dict = new Dictionary<int, T>();
             foreach (var entity in existingEntities)
             {
-                dict[entity.ID] = entity;
+                dict[entity.Id] = entity;
             }
 
-            foreach (var entity in inMemoryEntities.Where(r => r.ID != 0))
+            foreach (var entity in inMemoryEntities.Where(r => r.Id != 0))
             {
-                dict[entity.ID] = entity;
+                dict[entity.Id] = entity;
             }
 
             var result = dict.Values.ToList();
-            result.AddRange(inMemoryEntities.Where(r => r.ID == 0));
+            result.AddRange(inMemoryEntities.Where(r => r.Id == 0));
             return result;
         }
 

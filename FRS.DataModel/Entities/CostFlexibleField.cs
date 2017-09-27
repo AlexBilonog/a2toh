@@ -6,7 +6,7 @@ namespace FRS.DataModel.Entities
 {
     public partial class CostFlexibleField : IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Code { get; set; }
 
         public ICollection<CostFlexibleFieldVersion> CostFlexibleFieldVersions { get; set; } = new HashSet<CostFlexibleFieldVersion>();

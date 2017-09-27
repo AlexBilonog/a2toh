@@ -7,12 +7,12 @@ namespace FRS.DataModel.Entities
 {
     public partial class AttendeeBasicFieldVersion : AuditInfo, IEntity, IHasId, IHasDescription
     {
-        public int ID { get; set; }
-        public int AttendeeBasicFieldID { get; set; }
-        public int? BasicFieldDictionaryTypeID { get; set; }
-        public int BasicFieldTypeID { get; set; }
+        public int Id { get; set; }
+        public int AttendeeBasicFieldId { get; set; }
+        public int? BasicFieldDictionaryTypeId { get; set; }
+        public int BasicFieldTypeId { get; set; }
         public string Description { get; set; }
-        public int EventTypeVersionID { get; set; }
+        public int EventTypeVersionId { get; set; }
         public bool IsMandatory { get; set; }
         public string Tooltip { get; set; }
 
@@ -30,21 +30,21 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.AttendeeBasicField)
                     .WithMany(p => p.AttendeeBasicFieldVersions)
-                    .HasForeignKey(d => d.AttendeeBasicFieldID)
+                    .HasForeignKey(d => d.AttendeeBasicFieldId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.BasicFieldDictionaryType)
                     .WithMany(p => p.AttendeeBasicFieldVersions)
-                    .HasForeignKey(d => d.BasicFieldDictionaryTypeID);
+                    .HasForeignKey(d => d.BasicFieldDictionaryTypeId);
 
                 entity.HasOne(d => d.BasicFieldType)
                     .WithMany(p => p.AttendeeBasicFieldVersions)
-                    .HasForeignKey(d => d.BasicFieldTypeID)
+                    .HasForeignKey(d => d.BasicFieldTypeId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.EventTypeVersion)
                     .WithMany(p => p.AttendeeBasicFieldVersions)
-                    .HasForeignKey(d => d.EventTypeVersionID)
+                    .HasForeignKey(d => d.EventTypeVersionId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

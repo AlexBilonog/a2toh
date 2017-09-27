@@ -7,14 +7,14 @@ namespace FRS.DataModel.Entities
 {
     public partial class Agenda : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
-        public int? AgendaCommonProgramVersionID { get; set; }
-        public int? AgendaOtherProgramVersionID { get; set; }
-        public int? AgendaWorkingProgramVersionID { get; set; }
+        public int Id { get; set; }
+        public int? AgendaCommonProgramVersionId { get; set; }
+        public int? AgendaOtherProgramVersionId { get; set; }
+        public int? AgendaWorkingProgramVersionId { get; set; }
         public string Content { get; set; }
         public DateTime DateTimeFrom { get; set; }
         public DateTime DateTimeTo { get; set; }
-        public int EventID { get; set; }
+        public int EventId { get; set; }
         public bool IsPlanned { get; set; }
         public int Position { get; set; }
 
@@ -31,19 +31,19 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.AgendaCommonProgramVersion)
                     .WithMany(p => p.Agenda)
-                    .HasForeignKey(d => d.AgendaCommonProgramVersionID);
+                    .HasForeignKey(d => d.AgendaCommonProgramVersionId);
 
                 entity.HasOne(d => d.AgendaOtherProgramVersion)
                     .WithMany(p => p.Agenda)
-                    .HasForeignKey(d => d.AgendaOtherProgramVersionID);
+                    .HasForeignKey(d => d.AgendaOtherProgramVersionId);
 
                 entity.HasOne(d => d.AgendaWorkingProgramVersion)
                     .WithMany(p => p.Agenda)
-                    .HasForeignKey(d => d.AgendaWorkingProgramVersionID);
+                    .HasForeignKey(d => d.AgendaWorkingProgramVersionId);
 
                 entity.HasOne(d => d.Event)
                     .WithMany(p => p.Agenda)
-                    .HasForeignKey(d => d.EventID).OnDelete(DeleteBehavior.Restrict);
+                    .HasForeignKey(d => d.EventId).OnDelete(DeleteBehavior.Restrict);
             });
         }
     }

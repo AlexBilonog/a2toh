@@ -6,7 +6,7 @@ namespace FRS.DataModel.Entities
 {
     public partial class AttendeeSalutation : IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public ICollection<AttendeeHistory> AttendeeHistories { get; set; } = new HashSet<AttendeeHistory>();
@@ -15,7 +15,7 @@ namespace FRS.DataModel.Entities
         {
             modelBuilder.Entity<AttendeeSalutation>(entity =>
             {
-                entity.Property(e => e.ID).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Name)
                     .IsRequired()

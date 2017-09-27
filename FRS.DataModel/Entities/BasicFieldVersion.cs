@@ -7,14 +7,14 @@ namespace FRS.DataModel.Entities
 {
     public partial class BasicFieldVersion : AuditInfo, IEntity, IHasId, IHasDescription
     {
-        public int ID { get; set; }
-        public int? BasicFieldDictionaryTypeID { get; set; }
-        public int BasicFieldID { get; set; }
-        public int BasicFieldTypeID { get; set; }
+        public int Id { get; set; }
+        public int? BasicFieldDictionaryTypeId { get; set; }
+        public int BasicFieldId { get; set; }
+        public int BasicFieldTypeId { get; set; }
         public string DefaultValue1 { get; set; }
         public string DefaultValue2 { get; set; }
         public string Description { get; set; }
-        public int EventTypeVersionID { get; set; }
+        public int EventTypeVersionId { get; set; }
         public bool IsMandatory { get; set; }
         public string Tooltip { get; set; }
         public string OptionDescription { get; set; }
@@ -38,21 +38,21 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.BasicFieldDictionaryType)
                     .WithMany(p => p.BasicFieldVersions)
-                    .HasForeignKey(d => d.BasicFieldDictionaryTypeID);
+                    .HasForeignKey(d => d.BasicFieldDictionaryTypeId);
 
                 entity.HasOne(d => d.BasicField)
                     .WithMany(p => p.BasicFieldVersions)
-                    .HasForeignKey(d => d.BasicFieldID)
+                    .HasForeignKey(d => d.BasicFieldId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.BasicFieldType)
                     .WithMany(p => p.BasicFieldVersions)
-                    .HasForeignKey(d => d.BasicFieldTypeID)
+                    .HasForeignKey(d => d.BasicFieldTypeId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.EventTypeVersion)
                     .WithMany(p => p.BasicFieldVersions)
-                    .HasForeignKey(d => d.EventTypeVersionID)
+                    .HasForeignKey(d => d.EventTypeVersionId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

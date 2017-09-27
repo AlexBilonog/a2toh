@@ -9,12 +9,12 @@ namespace FRS.DataModel.Entities
 {
     public partial class VipLoungeDeclarationDate : AuditInfo, IEntity, IHasUser, IHasId, IHasDescription
     {
-        public int ID { get; set; }
-        public int CreationUserID { get; set; }
+        public int Id { get; set; }
+        public int CreationUserId { get; set; }
         public DateTime Date { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
-        public int VipLoungeID { get; set; }
+        public int VipLoungeId { get; set; }
 
         public ICollection<VipLoungeDeclarationDateUserNotification> VipLoungeDeclarationDateUserNotifications { get; set; } = new HashSet<VipLoungeDeclarationDateUserNotification>();
         public ICollection<VipLoungeDurationDate> VipLoungeDurationDates { get; set; } = new HashSet<VipLoungeDurationDate>();
@@ -33,12 +33,12 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.VipLoungeDeclarationDates)
-                    .HasForeignKey(d => d.CreationUserID)
+                    .HasForeignKey(d => d.CreationUserId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.VipLounge)
                     .WithMany(p => p.VipLoungeDeclarationDates)
-                    .HasForeignKey(d => d.VipLoungeID)
+                    .HasForeignKey(d => d.VipLoungeId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

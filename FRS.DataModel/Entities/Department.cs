@@ -12,8 +12,8 @@ namespace FRS.DataModel.Entities
             IsActive = true;
         }
 
-        public int ID { get; set; }
-        public int CompanyID { get; set; }
+        public int Id { get; set; }
+        public int CompanyId { get; set; }
         public string Description { get; set; }
         public bool IsActive { get; set; }
         public string Name { get; set; }
@@ -34,11 +34,11 @@ namespace FRS.DataModel.Entities
                     .IsRequired()
                     .HasMaxLength(440);
 
-                entity.HasIndex(e => new { e.CompanyID, e.Name }).IsUnique();
+                entity.HasIndex(e => new { e.CompanyId, e.Name }).IsUnique();
 
                 entity.HasOne(d => d.Company)
                     .WithMany(p => p.Departments)
-                    .HasForeignKey(d => d.CompanyID)
+                    .HasForeignKey(d => d.CompanyId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

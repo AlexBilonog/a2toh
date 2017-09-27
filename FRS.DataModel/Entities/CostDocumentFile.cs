@@ -5,7 +5,7 @@ namespace FRS.DataModel.Entities
 {
     public partial class CostDocumentFile : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public byte[] Content { get; set; }
 
         public CostDocument CostDocument { get; set; }
@@ -14,13 +14,13 @@ namespace FRS.DataModel.Entities
         {
             modelBuilder.Entity<CostDocumentFile>(entity =>
             {
-                entity.Property(e => e.ID).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Content).IsRequired();
 
                 entity.HasOne(d => d.CostDocument)
                     .WithOne(p => p.CostDocumentFile)
-                    .HasForeignKey<CostDocumentFile>(d => d.ID);
+                    .HasForeignKey<CostDocumentFile>(d => d.Id);
             });
         }
     }

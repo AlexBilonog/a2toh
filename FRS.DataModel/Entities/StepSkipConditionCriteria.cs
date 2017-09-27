@@ -6,15 +6,15 @@ namespace FRS.DataModel.Entities
 {
     public partial class StepSkipConditionCriteria : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
-        public int? ConditionCriteriaOperatorID { get; set; }
-        public int ConditionOperatorID { get; set; }
+        public int Id { get; set; }
+        public int? ConditionCriteriaOperatorId { get; set; }
+        public int ConditionOperatorId { get; set; }
         public int OrderNumber { get; set; }
-        public int StepSkipConditionID { get; set; }
+        public int StepSkipConditionId { get; set; }
         public string Value { get; set; }
-        public int WorkflowStepID { get; set; }
+        public int WorkflowStepId { get; set; }
         public string BasicFieldCode { get; set; }
-        public int? BasicFieldEventTypeID { get; set; }
+        public int? BasicFieldEventTypeId { get; set; }
 
         public ConditionCriteriaOperator ConditionCriteriaOperator { get; set; }
         public ConditionOperator ConditionOperator { get; set; }
@@ -32,26 +32,26 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.ConditionCriteriaOperator)
                     .WithMany(p => p.StepSkipConditionCriterias)
-                    .HasForeignKey(d => d.ConditionCriteriaOperatorID);
+                    .HasForeignKey(d => d.ConditionCriteriaOperatorId);
 
                 entity.HasOne(d => d.ConditionOperator)
                     .WithMany(p => p.StepSkipConditionCriterias)
-                    .HasForeignKey(d => d.ConditionOperatorID)
+                    .HasForeignKey(d => d.ConditionOperatorId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.StepSkipCondition)
                     .WithMany(p => p.StepSkipConditionCriterias)
-                    .HasForeignKey(d => d.StepSkipConditionID)
+                    .HasForeignKey(d => d.StepSkipConditionId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.WorkflowStep)
                     .WithMany(p => p.StepSkipConditionCriterias)
-                    .HasForeignKey(d => d.WorkflowStepID)
+                    .HasForeignKey(d => d.WorkflowStepId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.BasicFieldEventType)
                     .WithMany()
-                    .HasForeignKey(d => d.BasicFieldEventTypeID);
+                    .HasForeignKey(d => d.BasicFieldEventTypeId);
             });
         }
     }

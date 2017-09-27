@@ -1,9 +1,7 @@
 using FRS.Common;
 using FRS.Common.Contracts;
-using FRS.DataModel.Misc;
+using FRS.Common.Test;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -12,19 +10,20 @@ using System.Threading.Tasks;
 
 namespace FRS.DataModel
 {
-    public class FRSDbContext : DbContext
+    public class FRSContext : DbContext
     {
-        public FRSDbContext()
+        public FRSContext()
         {
             if (!TestEnvironment.IsSet)
-                Database.SetCommandTimeout(600);
+                Database.SetCommandTimeout(600); //TODO move to connections string?
         }
 
-        public FRSDbContext(DbContextOptions<FRSDbContext> options)
+        //TODO is it still needed? Maybe for tests?
+        public FRSContext(DbContextOptions<FRSContext> options)
             : base(options)
         {
             if (!TestEnvironment.IsSet)
-                Database.SetCommandTimeout(600);
+                Database.SetCommandTimeout(600); //TODO move to connections string?
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -35,11 +34,6 @@ namespace FRS.DataModel
                 var entity = (IEntity)Activator.CreateInstance(entityType);
                 entity.Configure(modelBuilder);
             }
-
-#if DEBUG
-            this.GetService<ILoggerFactory>().AddProvider(new DebugLoggerProvider());
-            //this.GetService<ILoggerFactory>().AddDebug(LogLevel.Debug);
-#endif
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

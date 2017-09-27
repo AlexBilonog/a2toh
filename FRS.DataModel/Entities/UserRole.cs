@@ -7,10 +7,10 @@ namespace FRS.DataModel.Entities
 {
     public partial class UserRole : AuditInfo, IEntity, IHasUser, IHasId
     {
-        public int ID { get; set; }
-        public string DataRoleIDs { get; set; }
-        public int RoleID { get; set; }
-        public int UserID { get; set; }
+        public int Id { get; set; }
+        public string DataRoleIds { get; set; }
+        public int RoleId { get; set; }
+        public int UserId { get; set; }
 
         public Role Role { get; set; }
         public User User { get; set; }
@@ -19,16 +19,16 @@ namespace FRS.DataModel.Entities
         {
             modelBuilder.Entity<UserRole>(entity =>
             {
-                entity.Property(e => e.DataRoleIDs).IsRequired();
+                entity.Property(e => e.DataRoleIds).IsRequired();
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.UserRoles)
-                    .HasForeignKey(d => d.RoleID)
+                    .HasForeignKey(d => d.RoleId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserRoles)
-                    .HasForeignKey(d => d.UserID)
+                    .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

@@ -6,8 +6,8 @@ namespace FRS.DataModel.Entities
 {
     public partial class LoggingAction : IEntity, IHasId
     {
-        public int ID { get; set; }
-        public int? LoggingActionModuleID { get; set; }
+        public int Id { get; set; }
+        public int? LoggingActionModuleId { get; set; }
         public string Name { get; set; }
 
         public ICollection<Logging> Loggings { get; set; } = new HashSet<Logging>();
@@ -17,7 +17,7 @@ namespace FRS.DataModel.Entities
         {
             modelBuilder.Entity<LoggingAction>(entity =>
             {
-                entity.Property(e => e.ID).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -25,7 +25,7 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.LoggingActionModule)
                     .WithMany(p => p.LoggingActions)
-                    .HasForeignKey(d => d.LoggingActionModuleID);
+                    .HasForeignKey(d => d.LoggingActionModuleId);
             });
         }
     }

@@ -120,7 +120,7 @@ SELECT * FROM @id ORDER BY Id"; // Order By's are important!
                 if (Dto.FillIds)
                 {
                     reader.Read();
-                    entity.ID = (int)reader[0];
+                    entity.Id = (int)reader[0];
                 }
 
                 if (Dto.SetStateUnchanged)
@@ -153,127 +153,5 @@ SELECT * FROM @id ORDER BY Id"; // Order By's are important!
 
             return (Func<T, object>)lambda.Compile();
         }
-
-        /*private static string InsertBulkOld<T>(DbContext context, bool fillIds, List<T> entityList) where T : class, IEntity, IHasId
-        {
-            List<string> columnNames = null;
-            string insertList = null;
-            //var tempTable = "Temp" + typeof(T).Name;
-            var tempTable = "tempdb..#Temp";
-
-            var adapter = new SqlDataAdapter($@"
-    IF OBJECT_ID('{tempTable}') IS NOT NULL
-    DROP TABLE {tempTable}
-
-    SELECT TOP 0 *
-    INTO {tempTable}
-    FROM {typeof(T).Name}
-
-    SELECT * FROM {tempTable}", (SqlConnection)context.Database.Connection);
-            var table = new DataTable();
-            adapter.Fill(table);
-
-            var rows = new List<DataRow>();
-            foreach (var entity in entityList)
-            {
-                var entry = context.Entry(entity);
-                if (entry.State != EntityState.Added)
-                    entry.State = EntityState.Added;
-
-                if (columnNames == null)
-                {
-                    columnNames = context.Entry(entity).CurrentValues.PropertyNames.ToList();
-                    insertList = string.Join(",", columnNames.Where(r => r != "ID"));
-                }
-
-                var row = table.NewRow();
-                rows.Add(row);
-
-                for (var i = 0; i < columnNames.Count; i++)
-                {
-                    row[i] = entry.CurrentValues[columnNames[i]] ?? DBNull.Value;
-                }
-            }
-
-            var bulk = new SqlBulkCopy((SqlConnection)context.Database.Connection);
-            bulk.DestinationTableName = $"{tempTable}";
-            bulk.WriteToServer(rows.ToArray());
-
-            var s = $@"
-    DECLARE @id TABLE (Id int)
-
-    INSERT {typeof(T).Name}({insertList})
-    OUTPUT INSERTED.ID INTO @id
-    SELECT {insertList}
-    FROM {tempTable}
-    ORDER BY ID"; // Order By is important (bug if > 100 records)
-
-            if (fillIds)
-                s += "\n\nSELECT * FROM @id ORDER BY Id"; // Order By is important
-
-            return s;
-        }
-        
-        private static string InsertBatch<T>(DbContext context, bool fillIds, List<T> entityList) where T : class, IEntity, IHasId
-        {
-            List<string> columnNames = null;
-            string insertList = null;
-
-            var s = new StringBuilder(@"
-    DECLARE @id TABLE (Id int)
-    ");
-            var i = 0;
-            foreach (var entity in entityList)
-            {
-                var entry = context.Entry(entity);
-                if (entry.State != EntityState.Added)
-                    entry.State = EntityState.Added;
-
-                if (columnNames == null)
-                {
-                    columnNames = context.Entry(entity).CurrentValues.PropertyNames.ToList();
-                    insertList = string.Join(",", columnNames.Where(r => r != "ID"));
-                }
-
-                if (i % 1000 == 0)
-                {
-                    s.Append($@"
-    INSERT {typeof(T).Name}({insertList})
-    OUTPUT INSERTED.ID INTO @id
-    VALUES");
-                }
-                else
-                    s.Append(",");
-
-                var valueList = string.Join(",", columnNames.Where(r => r != "ID").Select(r => SqlEncode(entry.CurrentValues[r])));
-                s.Append($"\n({valueList})");
-
-                i++;
-            }
-
-            if (fillIds)
-                s.Append("\n\nSELECT * FROM @id ORDER BY Id"); // Order By is important
-
-            return s.ToString();
-        }
-
-        private static string SqlEncode(object value)
-        {
-            if (value == null)
-                return "null";
-            else if (value is DateTime?)
-                return "'" + ((DateTime?)value).Value.ToString("yyyy-MM-ddThh:mm:ss.fff") + "'";
-            else if (value is string)
-                return "N'" + value.ToString().Replace("'", "''") + "'";
-            else // bool, int
-            {
-                var s = value.ToString();
-                if (s == "True")
-                    s = "1";
-                if (s == "False")
-                    s = "0";
-                return s;
-            }
-        }*/
     }
 }

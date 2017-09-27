@@ -8,10 +8,10 @@ namespace FRS.DataModel.Entities
 {
     public partial class UserDepartment : AuditInfo, IEntity, IHasValidityPeriod, IHasUser, IHasId
     {
-        public int ID { get; set; }
-        public int DepartmentID { get; set; }
+        public int Id { get; set; }
+        public int DepartmentId { get; set; }
         public DateTime SetDateTime { get; set; }
-        public int UserID { get; set; }
+        public int UserId { get; set; }
         public DateTime ValidFromDate { get; set; }
         public DateTime ValidToDate { get; set; }
 
@@ -24,12 +24,12 @@ namespace FRS.DataModel.Entities
             {
                 entity.HasOne(d => d.Department)
                     .WithMany(p => p.UserDepartments)
-                    .HasForeignKey(d => d.DepartmentID)
+                    .HasForeignKey(d => d.DepartmentId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserDepartments)
-                    .HasForeignKey(d => d.UserID)
+                    .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

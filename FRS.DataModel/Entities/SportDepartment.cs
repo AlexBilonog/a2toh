@@ -6,9 +6,9 @@ namespace FRS.DataModel.Entities
 {
     public class SportDepartment : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
-        public int SportID { get; set; }
-        public int DepartmentID { get; set; }
+        public int Id { get; set; }
+        public int SportId { get; set; }
+        public int DepartmentId { get; set; }
         public bool IsActive { get; set; }
 
         public Sport Sport { get; set; }
@@ -20,15 +20,15 @@ namespace FRS.DataModel.Entities
             {
                 entity.HasOne(d => d.Sport)
                     .WithMany()
-                    .HasForeignKey(d => d.SportID)
+                    .HasForeignKey(d => d.SportId)
                     .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasOne(d => d.Department)
                     .WithMany(p => p.SportDepartments)
-                    .HasForeignKey(d => d.DepartmentID)
+                    .HasForeignKey(d => d.DepartmentId)
                     .OnDelete(DeleteBehavior.Restrict);
 
-                entity.HasIndex(d => new { d.DepartmentID, d.SportID })
+                entity.HasIndex(d => new { d.DepartmentId, d.SportId })
                     .IsUnique();
             });
         }

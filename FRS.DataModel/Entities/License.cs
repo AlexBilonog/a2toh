@@ -6,7 +6,7 @@ namespace FRS.DataModel.Entities
 {
     public class License : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Value { get; set; }
         public DateTime ValidFrom { get; set; }
         public DateTime ValidTo { get; set; }

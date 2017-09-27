@@ -7,9 +7,9 @@ namespace FRS.DataModel.Entities
 {
     public partial class Permission : IEntity, IHasId, IHasDescription
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Description { get; set; }
-        public int PermissionTypeID { get; set; }
+        public int PermissionTypeId { get; set; }
 
         public ICollection<PermissionRole> PermissionRoles { get; set; } = new HashSet<PermissionRole>();
         public ICollection<WorkflowStep> WorkflowSteps { get; set; } = new HashSet<WorkflowStep>();
@@ -25,7 +25,7 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.PermissionType)
                     .WithMany(p => p.Permissions)
-                    .HasForeignKey(d => d.PermissionTypeID)
+                    .HasForeignKey(d => d.PermissionTypeId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

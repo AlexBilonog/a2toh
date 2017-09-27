@@ -11,7 +11,7 @@ namespace Angular2Spa.Controllers
     [Route("api/[controller]")]
     public class ProductsController : Controller
     {
-        private readonly FRSDbContext _context;
+        private readonly FRSContext _context;
 
         private static List<Product> _products = new List<Product>
         {
@@ -332,7 +332,7 @@ namespace Angular2Spa.Controllers
             },
         };
 
-        public ProductsController(FRSDbContext context)
+        public ProductsController(FRSContext context)
         {
             _context = context;
         }

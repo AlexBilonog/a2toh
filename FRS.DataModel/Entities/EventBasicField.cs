@@ -6,9 +6,9 @@ namespace FRS.DataModel.Entities
 {
     public partial class EventBasicField : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
-        public int BasicFieldVersionID { get; set; }
-        public int EventID { get; set; }
+        public int Id { get; set; }
+        public int BasicFieldVersionId { get; set; }
+        public int EventId { get; set; }
         public string Value1 { get; set; }
         public string Value2 { get; set; }
 
@@ -25,12 +25,12 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.BasicFieldVersion)
                     .WithMany(p => p.EventBasicFields)
-                    .HasForeignKey(d => d.BasicFieldVersionID)
+                    .HasForeignKey(d => d.BasicFieldVersionId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Event)
                     .WithMany(p => p.EventBasicFields)
-                    .HasForeignKey(d => d.EventID)
+                    .HasForeignKey(d => d.EventId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

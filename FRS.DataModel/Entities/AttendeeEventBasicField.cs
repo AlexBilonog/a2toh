@@ -6,9 +6,9 @@ namespace FRS.DataModel.Entities
 {
     public partial class AttendeeEventBasicField : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
-        public int AttendeeBasicFieldVersionID { get; set; }
-        public int AttendeeEventID { get; set; }
+        public int Id { get; set; }
+        public int AttendeeBasicFieldVersionId { get; set; }
+        public int AttendeeEventId { get; set; }
         public string Value1 { get; set; }
         public string Value2 { get; set; }
 
@@ -25,12 +25,12 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.AttendeeBasicFieldVersion)
                     .WithMany(p => p.AttendeeEventBasicFields)
-                    .HasForeignKey(d => d.AttendeeBasicFieldVersionID)
+                    .HasForeignKey(d => d.AttendeeBasicFieldVersionId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.AttendeeEvent)
                     .WithMany(p => p.AttendeeEventBasicFields)
-                    .HasForeignKey(d => d.AttendeeEventID);
+                    .HasForeignKey(d => d.AttendeeEventId);
             });
         }
     }

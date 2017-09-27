@@ -8,13 +8,13 @@ namespace FRS.DataModel.Entities
 {
     public partial class AttendeeHistory : AuditInfo, IEntity, IHasActiveState, IHasId
     {
-        public int ID { get; set; }
-        public int AttendeeAccessoryID { get; set; }
-        public int AttendeeID { get; set; }
-        public int? AttendeeSalutationID { get; set; }
+        public int Id { get; set; }
+        public int AttendeeAccessoryId { get; set; }
+        public int AttendeeId { get; set; }
+        public int? AttendeeSalutationId { get; set; }
         public DateTime? Birthday { get; set; }
-        public int? CompanyID { get; set; }
-        public int? DepartmentID { get; set; }
+        public int? CompanyId { get; set; }
+        public int? DepartmentId { get; set; }
         public string Email { get; set; }
         public string ExternalCompany { get; set; }
         public string ExternalDepartment { get; set; }
@@ -25,9 +25,9 @@ namespace FRS.DataModel.Entities
         public bool IsTechnicalRewriting { get; set; }
         public bool IsTemporaryWorker { get; set; }
         public string LastName { get; set; }
-        public int? ParentAttendeeID { get; set; }
+        public int? ParentAttendeeId { get; set; }
         public string PersonalNo { get; set; }
-        public int TaxationID { get; set; }
+        public int TaxationId { get; set; }
         public string Title { get; set; }
         public string Supervisor { get; set; }
         public DateTime ValidFrom { get; set; }
@@ -73,33 +73,33 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.AttendeeAccessory)
                     .WithMany(p => p.AttendeeHistories)
-                    .HasForeignKey(d => d.AttendeeAccessoryID)
+                    .HasForeignKey(d => d.AttendeeAccessoryId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Attendee)
                     .WithMany(p => p.AttendeeHistories)
-                    .HasForeignKey(d => d.AttendeeID)
+                    .HasForeignKey(d => d.AttendeeId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.AttendeeSalutation)
                     .WithMany(p => p.AttendeeHistories)
-                    .HasForeignKey(d => d.AttendeeSalutationID);
+                    .HasForeignKey(d => d.AttendeeSalutationId);
 
                 entity.HasOne(d => d.Company)
                     .WithMany(p => p.AttendeeHistories)
-                    .HasForeignKey(d => d.CompanyID);
+                    .HasForeignKey(d => d.CompanyId);
 
                 entity.HasOne(d => d.Department)
                     .WithMany(p => p.AttendeeHistories)
-                    .HasForeignKey(d => d.DepartmentID);
+                    .HasForeignKey(d => d.DepartmentId);
 
                 entity.HasOne(d => d.Attendee1)
                     .WithMany(p => p.AttendeeHistories1)
-                    .HasForeignKey(d => d.ParentAttendeeID);
+                    .HasForeignKey(d => d.ParentAttendeeId);
 
                 entity.HasOne(d => d.Taxation)
                     .WithMany(p => p.AttendeeHistories)
-                    .HasForeignKey(d => d.TaxationID)
+                    .HasForeignKey(d => d.TaxationId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

@@ -6,7 +6,7 @@ namespace FRS.DataModel.Entities
 {
     public partial class Limit35EuroReport : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public DateTime Date { get; set; }
         public bool IsProcessed { get; set; }
 

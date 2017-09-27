@@ -9,11 +9,11 @@ namespace FRS.DataModel.Entities
 {
     public partial class Competitor : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public DateTime Date { get; set; }
         public int SeasonId { get; set; }
-        public int TournamentID { get; set; }
+        public int TournamentId { get; set; }
 
         public Season Season { get; set; }
         public Tournament Tournament { get; set; }
@@ -35,7 +35,7 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.Tournament)
                     .WithMany()
-                    .HasForeignKey(d => d.TournamentID)
+                    .HasForeignKey(d => d.TournamentId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

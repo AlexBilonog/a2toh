@@ -6,12 +6,12 @@ namespace FRS.DataModel.Entities
 {
     public partial class AttendeeAllocatedCostValue : IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public decimal? AllocatedValue { get; set; }
-        public int AttendeeEventID { get; set; }
-        public int? CostAllocationReasonID { get; set; }
-        public int CostID { get; set; }
-        public int? GiftID { get; set; }
+        public int AttendeeEventId { get; set; }
+        public int? CostAllocationReasonId { get; set; }
+        public int CostId { get; set; }
+        public int? GiftId { get; set; }
         public int? AllocatedGiftValue { get; set; }
 
         public AttendeeEvent AttendeeEvent { get; set; }
@@ -25,20 +25,20 @@ namespace FRS.DataModel.Entities
             {
                 entity.HasOne(d => d.AttendeeEvent)
                     .WithMany(p => p.AttendeeAllocatedCostValues)
-                    .HasForeignKey(d => d.AttendeeEventID);
+                    .HasForeignKey(d => d.AttendeeEventId);
 
                 entity.HasOne(d => d.CostAllocationReason)
                     .WithMany(p => p.AttendeeAllocatedCostValues)
-                    .HasForeignKey(d => d.CostAllocationReasonID);
+                    .HasForeignKey(d => d.CostAllocationReasonId);
 
                 entity.HasOne(d => d.Cost)
                     .WithMany(p => p.AttendeeAllocatedCostValues)
-                    .HasForeignKey(d => d.CostID)
+                    .HasForeignKey(d => d.CostId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Gift)
                     .WithMany(p => p.AttendeeAllocatedGiftValues)
-                    .HasForeignKey(d => d.GiftID)
+                    .HasForeignKey(d => d.GiftId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

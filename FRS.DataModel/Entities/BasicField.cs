@@ -6,7 +6,7 @@ namespace FRS.DataModel.Entities
 {
     public partial class BasicField : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Code { get; set; }
 
         public ICollection<BasicFieldVersion> BasicFieldVersions { get; set; } = new HashSet<BasicFieldVersion>();

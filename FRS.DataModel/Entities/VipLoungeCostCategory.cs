@@ -6,11 +6,11 @@ namespace FRS.DataModel.Entities
 {
     public partial class VipLoungeCostCategory : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
-        public int CostCategoryVersionID { get; set; }
+        public int Id { get; set; }
+        public int CostCategoryVersionId { get; set; }
         public decimal? CostSum { get; set; }
         public bool? IsExtraCategory { get; set; }
-        public int VipLoungeID { get; set; }
+        public int VipLoungeId { get; set; }
 
         public CostCategoryVersion CostCategoryVersion { get; set; }  
         public VipLounge VipLounge { get; set; }
@@ -21,12 +21,12 @@ namespace FRS.DataModel.Entities
             {
                 entity.HasOne(d => d.CostCategoryVersion)
                     .WithMany(p => p.VipLoungeCostCategories)
-                    .HasForeignKey(d => d.CostCategoryVersionID)
+                    .HasForeignKey(d => d.CostCategoryVersionId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.VipLounge)
                     .WithMany(p => p.VipLoungeCostCategories)
-                    .HasForeignKey(d => d.VipLoungeID)
+                    .HasForeignKey(d => d.VipLoungeId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

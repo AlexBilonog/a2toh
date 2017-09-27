@@ -6,7 +6,7 @@ namespace FRS.DataModel.Entities
 {
     public partial class WorkflowStepType : IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public ICollection<WorkflowStep> WorkflowSteps { get; set; } = new HashSet<WorkflowStep>();

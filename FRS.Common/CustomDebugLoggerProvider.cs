@@ -1,13 +1,14 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
+using System.Diagnostics;
 
 namespace FRS.Common
 {
-    public class DebugLoggerProvider : ILoggerProvider
+    public class CustomDebugLoggerProvider : ILoggerProvider
     {
         public ILogger CreateLogger(string categoryName)
         {
-            return new DebugLogger();
+            return new CustomDebugLogger();
         }
 
         public void Dispose()
@@ -15,7 +16,7 @@ namespace FRS.Common
         }
     }
 
-    internal class DebugLogger : ILogger
+    internal class CustomDebugLogger : ILogger
     {
         public IDisposable BeginScope<TState>(TState state)
         {
@@ -29,29 +30,21 @@ namespace FRS.Common
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
-            /*if (formatter != null)
+            if (state.GetType().Name.StartsWith("LogValues`") || logLevel.In(LogLevel.Warning, LogLevel.Error, LogLevel.Critical))
             {
                 var str = formatter(state, exception);
-                if (str.Contains("Optimized query model:"))
-                    Debug.WriteLine(str);
-            }*/
+                if (str.StartsWith("Sending file. Request path") ||
+                    str.StartsWith("Executing") ||
+                    str.StartsWith("Entity Framework Core"))
+                    return;
 
-            //TODO
-            //if (state is DbCommandLogData)
-            //{
-            //    var command = (DbCommandLogData)(object)state;
-            //    var strBuilder = new StringBuilder(command.CommandText);
-
-            //    foreach (var parameter in command.Parameters.Reverse())
-            //    {
-            //        strBuilder.Replace(parameter.Name, SqlEncode(parameter.Value));
-            //    }
-
-            //    var str = strBuilder.ToString();
-            //    RegexHelper.Replace(ref str, @"\[(\w*)\]", m => RegexHelper.Capture(m));
-            //    Debug.WriteLine(str);
-            //    Debug.WriteLine("    --" + command.ElapsedMilliseconds + " ms\n");
-            //}
+                if (str.StartsWith("Executed DbCommand"))
+                {
+                    str = "\nInformation: " + str + "\n";
+                }
+                RegexHelper.Replace(ref str, @"\[(\w*)\]", m => RegexHelper.Capture(m));
+                Debug.WriteLine(str);
+            }
         }
 
         private static string SqlEncode(object value)

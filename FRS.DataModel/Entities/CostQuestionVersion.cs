@@ -7,9 +7,9 @@ namespace FRS.DataModel.Entities
 {
     public partial class CostQuestionVersion : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Code { get; set; }
-        public int EventTypeVersionID { get; set; }
+        public int EventTypeVersionId { get; set; }
         public bool? IsForEventType { get; set; }
         public bool? IsForVipLounge { get; set; }
         public string Text { get; set; }
@@ -31,7 +31,7 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.EventTypeVersion)
                     .WithMany(p => p.CostQuestionVersions)
-                    .HasForeignKey(d => d.EventTypeVersionID)
+                    .HasForeignKey(d => d.EventTypeVersionId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

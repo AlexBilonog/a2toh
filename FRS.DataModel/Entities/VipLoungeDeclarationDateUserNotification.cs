@@ -7,10 +7,10 @@ namespace FRS.DataModel.Entities
 {
     public partial class VipLoungeDeclarationDateUserNotification : AuditInfo, IEntity, IHasUser, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public bool? IsEmailSent { get; set; }
-        public int NotificationUserID { get; set; }
-        public int VipLoungeDeclarationDateID { get; set; }
+        public int NotificationUserId { get; set; }
+        public int VipLoungeDeclarationDateId { get; set; }
 
         public User User { get; set; }
         public VipLoungeDeclarationDate VipLoungeDeclarationDate { get; set; }
@@ -21,12 +21,12 @@ namespace FRS.DataModel.Entities
             {
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.VipLoungeDeclarationDateUserNotifications)
-                    .HasForeignKey(d => d.NotificationUserID)
+                    .HasForeignKey(d => d.NotificationUserId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.VipLoungeDeclarationDate)
                     .WithMany(p => p.VipLoungeDeclarationDateUserNotifications)
-                    .HasForeignKey(d => d.VipLoungeDeclarationDateID)
+                    .HasForeignKey(d => d.VipLoungeDeclarationDateId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

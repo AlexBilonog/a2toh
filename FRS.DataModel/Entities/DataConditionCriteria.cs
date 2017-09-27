@@ -6,13 +6,13 @@ namespace FRS.DataModel.Entities
 {
     public partial class DataConditionCriteria : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string BasicFieldCode { get; set; }
-        public int? BasicFieldEventTypeID { get; set; }
-        public int ConditionCriteriaOperatorID { get; set; }
-        public int ConditionOperatorID { get; set; }
-        public int DataConditionFieldID { get; set; }
-        public int DataRoleID { get; set; }
+        public int? BasicFieldEventTypeId { get; set; }
+        public int ConditionCriteriaOperatorId { get; set; }
+        public int ConditionOperatorId { get; set; }
+        public int DataConditionFieldId { get; set; }
+        public int DataRoleId { get; set; }
         public int OrderNumber { get; set; }
         public string Value { get; set; }
 
@@ -34,26 +34,26 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.EventType)
                     .WithMany(p => p.DataConditionCriterias)
-                    .HasForeignKey(d => d.BasicFieldEventTypeID);
+                    .HasForeignKey(d => d.BasicFieldEventTypeId);
 
                 entity.HasOne(d => d.ConditionCriteriaOperator)
                     .WithMany(p => p.DataConditionCriterias)
-                    .HasForeignKey(d => d.ConditionCriteriaOperatorID)
+                    .HasForeignKey(d => d.ConditionCriteriaOperatorId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.ConditionOperator)
                     .WithMany(p => p.DataConditionCriterias)
-                    .HasForeignKey(d => d.ConditionOperatorID)
+                    .HasForeignKey(d => d.ConditionOperatorId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.DataConditionField)
                     .WithMany(p => p.DataConditionCriterias)
-                    .HasForeignKey(d => d.DataConditionFieldID)
+                    .HasForeignKey(d => d.DataConditionFieldId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.DataRole)
                     .WithMany(p => p.DataConditionCriterias)
-                    .HasForeignKey(d => d.DataRoleID)
+                    .HasForeignKey(d => d.DataRoleId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

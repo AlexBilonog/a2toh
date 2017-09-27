@@ -7,11 +7,11 @@ namespace FRS.DataModel.Entities
 {
     public partial class CostFlexibleFieldVersion : IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Code { get; set; }
-        public int CostFlexibleFieldID { get; set; }
-        public int CostFlexibleFieldTypeID { get; set; }
-        public int EventTypeVersionID { get; set; }
+        public int CostFlexibleFieldId { get; set; }
+        public int CostFlexibleFieldTypeId { get; set; }
+        public int EventTypeVersionId { get; set; }
         public bool? IsForVipLounge { get; set; }
         public bool? IsVipLoungeExtraCostVisible { get; set; }
         public string Name { get; set; }
@@ -36,17 +36,17 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.CostFlexibleField)
                     .WithMany(p => p.CostFlexibleFieldVersions)
-                    .HasForeignKey(d => d.CostFlexibleFieldID)
+                    .HasForeignKey(d => d.CostFlexibleFieldId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.CostFlexibleFieldType)
                     .WithMany(p => p.CostFlexibleFieldVersions)
-                    .HasForeignKey(d => d.CostFlexibleFieldTypeID)
+                    .HasForeignKey(d => d.CostFlexibleFieldTypeId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.EventTypeVersion)
                     .WithMany(p => p.CostFlexibleFieldVersions)
-                    .HasForeignKey(d => d.EventTypeVersionID)
+                    .HasForeignKey(d => d.EventTypeVersionId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

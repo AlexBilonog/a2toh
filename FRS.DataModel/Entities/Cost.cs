@@ -8,25 +8,25 @@ namespace FRS.DataModel.Entities
 {
     public partial class Cost : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public decimal Brutto { get; set; }
         public string Comment { get; set; }
-        public int? CostAllocationStatusID { get; set; }
-        public int TaxCodeID { get; set; }
-        public int? CostCategoryVersionID { get; set; }
-        public string DocumentID { get; set; }
-        public int? EventID { get; set; }
-        public int? GiftID { get; set; }
+        public int? CostAllocationStatusId { get; set; }
+        public int TaxCodeId { get; set; }
+        public int? CostCategoryVersionId { get; set; }
+        public string DocumentId { get; set; }
+        public int? EventId { get; set; }
+        public int? GiftId { get; set; }
         public bool IsAllocated { get; set; }
         public bool IsCommited { get; set; }
         public bool IsForAllocation { get; set; }
         public bool IsLastLevelCost { get; set; }
         public bool IsPlanned { get; set; }
         public decimal Netto { get; set; }
-        public int? ParentCostID { get; set; }
+        public int? ParentCostId { get; set; }
         public DateTime? RegisterDate { get; set; }
         public string RegisterNumber { get; set; }
-        public int? SourceTypeID { get; set; }
+        public int? SourceTypeId { get; set; }
         public string SupplierName { get; set; }
         public string SupplierNumber { get; set; }
         public bool? IsCreatedForGift { get; set; }
@@ -57,32 +57,32 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.CostAllocationStatuss)
                     .WithMany(p => p.Costs)
-                    .HasForeignKey(d => d.CostAllocationStatusID);
+                    .HasForeignKey(d => d.CostAllocationStatusId);
 
                 entity.HasOne(d => d.CostCategoryVersion)
                     .WithMany(p => p.Costs)
-                    .HasForeignKey(d => d.CostCategoryVersionID);
+                    .HasForeignKey(d => d.CostCategoryVersionId);
 
                 entity.HasOne(d => d.TaxCode)
                     .WithMany(p => p.Costs)
-                    .HasForeignKey(d => d.TaxCodeID)
+                    .HasForeignKey(d => d.TaxCodeId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Event)
                     .WithMany(p => p.Costs)
-                    .HasForeignKey(d => d.EventID);
+                    .HasForeignKey(d => d.EventId);
 
                 entity.HasOne(d => d.Gift)
                    .WithMany(p => p.Costs)
-                   .HasForeignKey(d => d.GiftID);
+                   .HasForeignKey(d => d.GiftId);
 
                 entity.HasOne(d => d.ParentCost)
                     .WithMany(p => p.ChildCosts)
-                    .HasForeignKey(d => d.ParentCostID);
+                    .HasForeignKey(d => d.ParentCostId);
 
                 entity.HasOne(d => d.SourceType)
                     .WithMany(p => p.Costs)
-                    .HasForeignKey(d => d.SourceTypeID);
+                    .HasForeignKey(d => d.SourceTypeId);
             });
         }
     }

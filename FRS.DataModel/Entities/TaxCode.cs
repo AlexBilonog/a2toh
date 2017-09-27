@@ -7,7 +7,7 @@ namespace FRS.DataModel.Entities
 {
     public partial class TaxCode : AuditInfo, IEntity, IHasDescription, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Account { get; set; }
         public int Category { get; set; }
         public string Code { get; set; }
@@ -15,7 +15,7 @@ namespace FRS.DataModel.Entities
         public DateTime ValidFromDate { get; set; }
         public DateTime ValidToDate { get; set; }
         public decimal Rate { get; set; }
-        public int? TaxCode2ID { get; set; }
+        public int? TaxCode2Id { get; set; }
 
         public ICollection<Cost> Costs { get; set; } = new HashSet<Cost>();
         public ICollection<VipLounge> VipLounges { get; set; } = new HashSet<VipLounge>();
@@ -40,7 +40,7 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.TaxCode2)
                     .WithMany(p => p.TaxCodes1)
-                    .HasForeignKey(d => d.TaxCode2ID);
+                    .HasForeignKey(d => d.TaxCode2Id);
             });
         }
     }

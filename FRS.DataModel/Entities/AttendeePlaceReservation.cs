@@ -6,12 +6,12 @@ namespace FRS.DataModel.Entities
 {
     public class AttendeePlaceReservation : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
-        public int VipLoungePlaceID { get; set; }
-        public int EventID { get; set; }
-        public int? ReservedAttendeeID { get; set; }
-        public int? AssignedAttendeeID { get; set; }
-        public int? AssignedAttendeeEventID { get; set; }
+        public int Id { get; set; }
+        public int VipLoungePlaceId { get; set; }
+        public int EventId { get; set; }
+        public int? ReservedAttendeeId { get; set; }
+        public int? AssignedAttendeeId { get; set; }
+        public int? AssignedAttendeeEventId { get; set; }
         public bool IsPlanned { get; set; }
 
         public VipLoungePlace VipLoungePlace { get; set; }
@@ -26,27 +26,27 @@ namespace FRS.DataModel.Entities
             {
                 entity.HasOne(d => d.VipLoungePlace)
                     .WithMany(p => p.AttendeePlaceReservations)
-                    .HasForeignKey(d => d.VipLoungePlaceID)
+                    .HasForeignKey(d => d.VipLoungePlaceId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.ReservedAttendee)
                     .WithMany()
-                    .HasForeignKey(d => d.ReservedAttendeeID)
+                    .HasForeignKey(d => d.ReservedAttendeeId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.AssignedAttendee)
                     .WithMany()
-                    .HasForeignKey(d => d.AssignedAttendeeID)
+                    .HasForeignKey(d => d.AssignedAttendeeId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.AssignedAttendeeEvent)
                     .WithOne(p => p.AttendeePlaceReservation)
-                    .HasForeignKey<AttendeePlaceReservation>(d => d.AssignedAttendeeEventID)
+                    .HasForeignKey<AttendeePlaceReservation>(d => d.AssignedAttendeeEventId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Event)
                     .WithMany(p => p.AttendeePlaceReservations)
-                    .HasForeignKey(d => d.EventID)
+                    .HasForeignKey(d => d.EventId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

@@ -8,15 +8,15 @@ namespace FRS.DataModel.Entities
 {
     public partial class CostDocument : AuditInfo, IEntity, IHasUser, IHasId, IHasDescription
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Description { get; set; }
-        public int EventID { get; set; }
+        public int EventId { get; set; }
         public string Extension { get; set; }
         public string FileName { get; set; }
         public bool IsPlanned { get; set; }
         public string Keywords { get; set; }
         public DateTime LastChangeDate { get; set; }
-        public int LastChangeUserID { get; set; }
+        public int LastChangeUserId { get; set; }
 
         public CostDocumentFile CostDocumentFile { get; set; }
         public Event Event { get; set; }
@@ -30,12 +30,12 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.Event)
                     .WithMany(p => p.CostDocuments)
-                    .HasForeignKey(d => d.EventID)
+                    .HasForeignKey(d => d.EventId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.CostDocuments)
-                    .HasForeignKey(d => d.LastChangeUserID)
+                    .HasForeignKey(d => d.LastChangeUserId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

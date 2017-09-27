@@ -8,12 +8,12 @@ namespace FRS.DataModel.Entities
 {
     public partial class EventTypeVersion : AuditInfo, IEntity, IHasId, IHasDescription
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public TimeSpan AgendaCoreFromTime { get; set; }
         public TimeSpan AgendaCoreToTime { get; set; }
         public string Description { get; set; }
-        public int EventTypeID { get; set; }
-        public int EventTypeVersionFileID { get; set; }
+        public int EventTypeId { get; set; }
+        public int EventTypeVersionFileId { get; set; }
         public string EventUpdateDescription { get; set; }
         public byte EventUpdateType { get; set; }
         public DateTime ImportDate { get; set; }
@@ -69,12 +69,12 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.EventType)
                     .WithMany(p => p.EventTypeVersions)
-                    .HasForeignKey(d => d.EventTypeID)
+                    .HasForeignKey(d => d.EventTypeId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.EventTypeVersionFile)
                     .WithMany(p => p.EventTypeVersions)
-                    .HasForeignKey(d => d.EventTypeVersionFileID)
+                    .HasForeignKey(d => d.EventTypeVersionFileId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

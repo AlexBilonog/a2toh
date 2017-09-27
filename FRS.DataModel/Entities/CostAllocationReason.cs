@@ -7,9 +7,9 @@ namespace FRS.DataModel.Entities
 {
     public partial class CostAllocationReason : IEntity, IHasId, IHasDescription
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Code { get; set; }
-        public int CostCategoryVersionID { get; set; }
+        public int CostCategoryVersionId { get; set; }
         public string Description { get; set; }
 
         public ICollection<AttendeeAllocatedCostValue> AttendeeAllocatedCostValues { get; set; } = new HashSet<AttendeeAllocatedCostValue>();
@@ -27,7 +27,7 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.CostCategoryVersion)
                     .WithMany(p => p.CostAllocationReasons)
-                    .HasForeignKey(d => d.CostCategoryVersionID)
+                    .HasForeignKey(d => d.CostCategoryVersionId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

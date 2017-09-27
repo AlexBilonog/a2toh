@@ -7,10 +7,10 @@ namespace FRS.DataModel.Entities
 {
     public partial class WorkflowStep : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public int? PermissionID { get; set; }
-        public int WorkflowStepTypeID { get; set; }
+        public int? PermissionId { get; set; }
+        public int WorkflowStepTypeId { get; set; }
 
         public ICollection<EmailTemplate> EmailTemplates { get; set; } = new HashSet<EmailTemplate>();
         public ICollection<EventTypeWorkflowStep> EventTypeWorkflowSteps { get; set; } = new HashSet<EventTypeWorkflowStep>();
@@ -29,11 +29,11 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.Permission)
                     .WithMany(p => p.WorkflowSteps)
-                    .HasForeignKey(d => d.PermissionID);
+                    .HasForeignKey(d => d.PermissionId);
 
                 entity.HasOne(d => d.WorkflowStepType)
                     .WithMany(p => p.WorkflowSteps)
-                    .HasForeignKey(d => d.WorkflowStepTypeID)
+                    .HasForeignKey(d => d.WorkflowStepTypeId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

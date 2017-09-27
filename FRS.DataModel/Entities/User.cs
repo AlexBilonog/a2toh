@@ -7,7 +7,7 @@ namespace FRS.DataModel.Entities
 {
     public partial class User : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
         public int? InvalidLoginAttemptsCount { get; set; }
@@ -23,7 +23,7 @@ namespace FRS.DataModel.Entities
         public string RemoteUserName { get; set; }
         public string ResetPasswordHash { get; set; }
         public DateTime? ResetPasswordSendDateTime { get; set; }
-        public int? RoleID { get; set; }
+        public int? RoleId { get; set; }
         public bool UseRemoteDirectory { get; set; }
 
         public ICollection<CostAllocationUserNotificationRecipient> CostAllocationUserNotificationRecipients { get; set; } = new HashSet<CostAllocationUserNotificationRecipient>();
@@ -98,7 +98,7 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.RoleID);
+                    .HasForeignKey(d => d.RoleId);
 
                 //Ignore:
                 entity.Ignore(e => e.HasChangedPassword);

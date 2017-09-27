@@ -6,7 +6,7 @@ namespace FRS.DataModel.Entities
 {
     public partial class EventType : AuditInfo, IEntity, IHasActiveState, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Code { get; set; }
         public bool IsActive { get; set; }
         public int OrderNumber { get; set; }

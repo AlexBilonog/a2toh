@@ -7,10 +7,10 @@ namespace FRS.DataModel.Entities
 {
     public partial class AgendaOtherProgramVersion : AuditInfo, IEntity, IHasId, IHasDescription
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Code { get; set; }
         public string Description { get; set; }
-        public int EventTypeVersionID { get; set; }
+        public int EventTypeVersionId { get; set; }
 
         public ICollection<Agenda> Agenda { get; set; } = new HashSet<Agenda>();
         public EventTypeVersion EventTypeVersion { get; set; }
@@ -27,7 +27,7 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.EventTypeVersion)
                     .WithMany(p => p.AgendaOtherProgramVersions)
-                    .HasForeignKey(d => d.EventTypeVersionID)
+                    .HasForeignKey(d => d.EventTypeVersionId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

@@ -6,7 +6,7 @@ namespace FRS.DataModel.Entities
 {
     public partial class AttendeeType : IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Code { get; set; }
 
         public ICollection<AttendeeTypeVersion> AttendeeTypeVersions { get; set; } = new HashSet<AttendeeTypeVersion>();

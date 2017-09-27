@@ -7,9 +7,9 @@ namespace FRS.DataModel.Entities
 {
     public partial class Gift : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
-        public int? ResponsibleUserID { get; set; }
-        public int? CostCenterID { get; set; }
+        public int Id { get; set; }
+        public int? ResponsibleUserId { get; set; }
+        public int? CostCenterId { get; set; }
         public string PurposeOfUse { get; set; }
         public DateTime? Date { get; set; }
         public string ProductNo { get; set; }
@@ -35,11 +35,11 @@ namespace FRS.DataModel.Entities
             {
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Gifts)
-                    .HasForeignKey(d => d.ResponsibleUserID);
+                    .HasForeignKey(d => d.ResponsibleUserId);
 
                 entity.HasOne(d => d.CostCenter)
                     .WithMany(p => p.Gifts)
-                    .HasForeignKey(d => d.CostCenterID);
+                    .HasForeignKey(d => d.CostCenterId);
             });
         }
     }

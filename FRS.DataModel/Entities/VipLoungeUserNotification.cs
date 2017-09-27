@@ -7,9 +7,9 @@ namespace FRS.DataModel.Entities
 {
     public partial class VipLoungeUserNotification : AuditInfo, IEntity, IHasUser, IHasId
     {
-        public int ID { get; set; }
-        public int NotificationUserID { get; set; }
-        public int VipLoungeID { get; set; }
+        public int Id { get; set; }
+        public int NotificationUserId { get; set; }
+        public int VipLoungeId { get; set; }
 
         public User User { get; set; }
         public VipLounge VipLounge { get; set; }
@@ -18,17 +18,17 @@ namespace FRS.DataModel.Entities
         {
             modelBuilder.Entity<VipLoungeUserNotification>(entity =>
             {
-                entity.HasIndex(e => new { e.VipLoungeID, e.NotificationUserID })
+                entity.HasIndex(e => new { e.VipLoungeId, e.NotificationUserId })
                     .IsUnique();
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.VipLoungeUserNotifications)
-                    .HasForeignKey(d => d.NotificationUserID)
+                    .HasForeignKey(d => d.NotificationUserId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.VipLounge)
                     .WithMany(p => p.VipLoungeUserNotifications)
-                    .HasForeignKey(d => d.VipLoungeID)
+                    .HasForeignKey(d => d.VipLoungeId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

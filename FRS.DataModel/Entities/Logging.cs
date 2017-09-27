@@ -8,12 +8,12 @@ namespace FRS.DataModel.Entities
 {
     public partial class Logging : AuditInfo, IEntity, IHasUser, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public DateTime ActionTime { get; set; }
         public string AdditionalInformation { get; set; }
-        public int LoggingActionID { get; set; }
-        public int? UserID { get; set; }
-        public int? UserRepresenterID { get; set; }
+        public int LoggingActionId { get; set; }
+        public int? UserId { get; set; }
+        public int? UserRepresenterId { get; set; }
 
         public LoggingAction LoggingAction { get; set; }
         public User User { get; set; }
@@ -27,17 +27,17 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.LoggingAction)
                     .WithMany(p => p.Loggings)
-                    .HasForeignKey(d => d.LoggingActionID)
+                    .HasForeignKey(d => d.LoggingActionId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Loggings)
-                    .HasForeignKey(d => d.UserID)
+                    .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.User1)
                     .WithMany(p => p.Loggings1)
-                    .HasForeignKey(d => d.UserRepresenterID);
+                    .HasForeignKey(d => d.UserRepresenterId);
             });
         }
     }

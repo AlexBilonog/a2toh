@@ -9,15 +9,15 @@ namespace FRS.DataModel.Entities
 {
     public partial class EventWorkflowStep : AuditInfo, IEntity, IHasUser, IHasId
     {
-        public int ID { get; set; }
-        public int EventID { get; set; }
+        public int Id { get; set; }
+        public int EventId { get; set; }
         public DateTime? ExecutedDateTime { get; set; }
-        public int? ExecutedUserID { get; set; }
+        public int? ExecutedUserId { get; set; }
         public DateTime? ExecutionDateDeadline { get; set; }
         public bool IsActualPhase { get; set; }
         public bool? IsBookingSuggestionActualPhase { get; set; }
         public bool? IsCurrent { get; set; }
-        public int WorkflowStepID { get; set; }
+        public int WorkflowStepId { get; set; }
         public int OrderNumber { get; set; }
 
         public ICollection<EventWorkflowStepHistory> EventWorkflowStepHistories { get; set; } = new HashSet<EventWorkflowStepHistory>();
@@ -31,16 +31,16 @@ namespace FRS.DataModel.Entities
             {
                 entity.HasOne(d => d.Event)
                     .WithMany(p => p.EventWorkflowSteps)
-                    .HasForeignKey(d => d.EventID)
+                    .HasForeignKey(d => d.EventId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.EventWorkflowSteps)
-                    .HasForeignKey(d => d.ExecutedUserID);
+                    .HasForeignKey(d => d.ExecutedUserId);
 
                 entity.HasOne(d => d.WorkflowStep)
                     .WithMany(p => p.EventWorkflowSteps)
-                    .HasForeignKey(d => d.WorkflowStepID)
+                    .HasForeignKey(d => d.WorkflowStepId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

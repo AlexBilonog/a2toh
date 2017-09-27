@@ -13,9 +13,9 @@ namespace FRS.DataModel.Entities
         public int EventWorkflowStepId { get; set; }
         public DateTime FinishedDate { get; set; }
         public int FinishedUserId { get; set; }
-        public int? RepresenterUserID { get; set; }
+        public int? RepresenterUserId { get; set; }
         public DateTime? WorkflowStepDeadline { get; set; }
-        public int WorkflowStepTypeActionID { get; set; }
+        public int WorkflowStepTypeActionId { get; set; }
 
         public EventWorkflowStep EventWorkflowStep { get; set; }
         public User User { get; set; }
@@ -40,11 +40,11 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.User1)
                     .WithMany(p => p.EventWorkflowStepHistories1)
-                    .HasForeignKey(d => d.RepresenterUserID);
+                    .HasForeignKey(d => d.RepresenterUserId);
 
                 entity.HasOne(d => d.WorkflowStepTypeAction)
                     .WithMany(p => p.EventWorkflowStepHistories)
-                    .HasForeignKey(d => d.WorkflowStepTypeActionID)
+                    .HasForeignKey(d => d.WorkflowStepTypeActionId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

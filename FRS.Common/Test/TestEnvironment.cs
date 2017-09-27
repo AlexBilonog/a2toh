@@ -1,4 +1,4 @@
-﻿namespace FRS.DataModel.Misc
+﻿namespace FRS.Common.Test
 {
     public class TestEnvironment
     {

@@ -7,7 +7,7 @@ namespace FRS.DataModel.Entities
 {
     public partial class Attendee : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public DateTime? ValidTo { get; set; }
 
         public ICollection<AttendeeHistory> AttendeeHistories { get; set; } = new HashSet<AttendeeHistory>();

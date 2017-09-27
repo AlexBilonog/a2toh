@@ -6,9 +6,9 @@ namespace FRS.DataModel.Entities
 {
     public partial class ExecutedTask : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public DateTime ExecutionTime { get; set; }
-        public int TaskTypeID { get; set; }
+        public int TaskTypeId { get; set; }
 
         public void Configure(ModelBuilder modelBuilder)
         {

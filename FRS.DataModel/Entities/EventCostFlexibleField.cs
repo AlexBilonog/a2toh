@@ -6,9 +6,9 @@ namespace FRS.DataModel.Entities
 {
     public partial class EventCostFlexibleField : IEntity, IHasId
     {
-        public int ID { get; set; }
-        public int CostFlexibleFieldVersionID { get; set; }
-        public int EventID { get; set; }
+        public int Id { get; set; }
+        public int CostFlexibleFieldVersionId { get; set; }
+        public int EventId { get; set; }
         public bool? Value { get; set; }
 
         public CostFlexibleFieldVersion CostFlexibleFieldVersion { get; set; }
@@ -20,12 +20,12 @@ namespace FRS.DataModel.Entities
             {
                 entity.HasOne(d => d.CostFlexibleFieldVersion)
                     .WithMany(p => p.EventCostFlexibleFields)
-                    .HasForeignKey(d => d.CostFlexibleFieldVersionID)
+                    .HasForeignKey(d => d.CostFlexibleFieldVersionId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Event)
                     .WithMany(p => p.EventCostFlexibleFields)
-                    .HasForeignKey(d => d.EventID)
+                    .HasForeignKey(d => d.EventId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

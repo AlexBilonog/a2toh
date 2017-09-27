@@ -6,7 +6,7 @@ namespace FRS.DataModel.Entities
 {
     public partial class EventStatuss : IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public ICollection<Event> Events { get; set; } = new HashSet<Event>();

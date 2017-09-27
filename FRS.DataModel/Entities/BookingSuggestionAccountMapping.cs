@@ -6,10 +6,10 @@ namespace FRS.DataModel.Entities
 {
     public partial class BookingSuggestionAccountMapping : AuditInfo, IEntity, IHasId, IHasDescription
     {
-        public int ID { get; set; }
-        public int BookingSuggestionID { get; set; }
+        public int Id { get; set; }
+        public int BookingSuggestionId { get; set; }
         public string Description { get; set; }
-        public int EventTypeID { get; set; }
+        public int EventTypeId { get; set; }
         public string MappedAccount { get; set; }
 
         public BookingSuggestion BookingSuggestion { get; set; }
@@ -27,12 +27,12 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.BookingSuggestion)
                     .WithMany(p => p.BookingSuggestionAccountMappings)
-                    .HasForeignKey(d => d.BookingSuggestionID)
+                    .HasForeignKey(d => d.BookingSuggestionId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.EventType)
                     .WithMany(p => p.BookingSuggestionAccountMappings)
-                    .HasForeignKey(d => d.EventTypeID)
+                    .HasForeignKey(d => d.EventTypeId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

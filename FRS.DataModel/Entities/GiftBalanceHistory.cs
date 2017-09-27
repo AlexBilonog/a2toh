@@ -6,12 +6,12 @@ namespace FRS.DataModel.Entities
 {
     public partial class GiftBalanceHistory : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
-        public int GiftID { get; set; }
+        public int Id { get; set; }
+        public int GiftId { get; set; }
         public int ClosingBalanceCalculated { get; set; }
         public int Difference { get; set; }
         public string Comment { get; set; }
-        public int UserID { get; set; }
+        public int UserId { get; set; }
         public DateTime Date { get; set; }
 
         public Gift Gift { get; set; }
@@ -23,11 +23,11 @@ namespace FRS.DataModel.Entities
             {
                 entity.HasOne(d => d.Gift)
                     .WithMany()
-                    .HasForeignKey(d => d.GiftID);
+                    .HasForeignKey(d => d.GiftId);
 
                 entity.HasOne(d => d.User)
                     .WithMany()
-                    .HasForeignKey(d => d.UserID);
+                    .HasForeignKey(d => d.UserId);
             });
         }
     }

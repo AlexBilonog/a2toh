@@ -5,7 +5,7 @@ namespace FRS.DataModel.Entities
 {
     public partial class Translation : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public bool IsHidden { get; set; }
         public string Key { get; set; }
         public string LanguageCode { get; set; }

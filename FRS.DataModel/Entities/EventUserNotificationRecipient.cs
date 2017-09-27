@@ -7,10 +7,10 @@ namespace FRS.DataModel.Entities
 {
     public partial class EventUserNotificationRecipient : AuditInfo, IEntity, IHasUser, IHasId
     {
-        public int ID { get; set; }
-        public int EventID { get; set; }
-        public int EventUserNotificationRecipientTypeID { get; set; }
-        public int UserID { get; set; }
+        public int Id { get; set; }
+        public int EventId { get; set; }
+        public int EventUserNotificationRecipientTypeId { get; set; }
+        public int UserId { get; set; }
 
         public Event Event { get; set; }
         public EventUserNotificationRecipientType EventUserNotificationRecipientType { get; set; }
@@ -20,22 +20,22 @@ namespace FRS.DataModel.Entities
         {
             modelBuilder.Entity<EventUserNotificationRecipient>(entity =>
             {
-                entity.HasIndex(e => new { e.EventID, e.UserID, e.EventUserNotificationRecipientTypeID })
+                entity.HasIndex(e => new { e.EventId, e.UserId, e.EventUserNotificationRecipientTypeId })
                     .IsUnique();
 
                 entity.HasOne(d => d.Event)
                     .WithMany(p => p.EventUserNotificationRecipients)
-                    .HasForeignKey(d => d.EventID)
+                    .HasForeignKey(d => d.EventId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.EventUserNotificationRecipientType)
                     .WithMany(p => p.EventUserNotificationRecipients)
-                    .HasForeignKey(d => d.EventUserNotificationRecipientTypeID)
+                    .HasForeignKey(d => d.EventUserNotificationRecipientTypeId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.EventUserNotificationRecipients)
-                    .HasForeignKey(d => d.UserID)
+                    .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

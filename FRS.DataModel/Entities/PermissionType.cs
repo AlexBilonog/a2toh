@@ -6,7 +6,7 @@ namespace FRS.DataModel.Entities
 {
     public partial class PermissionType : IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public ICollection<Permission> Permissions { get; set; } = new HashSet<Permission>();
@@ -15,7 +15,7 @@ namespace FRS.DataModel.Entities
         {
             modelBuilder.Entity<PermissionType>(entity =>
             {
-                entity.Property(e => e.ID).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Name)
                     .IsRequired()

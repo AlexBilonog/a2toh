@@ -1,9 +1,11 @@
-﻿using FRS.DataModel;
+﻿using FRS.Common;
+using FRS.DataModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
 
 namespace FRS.Web
@@ -20,13 +22,12 @@ namespace FRS.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<FRSDbContext>(options =>
+            services.AddLogging(options => options.AddProvider(new CustomDebugLoggerProvider()));
+
+            services.AddDbContext<FRSContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            //loggerFactory.AddDebug();
-
-            //Accept All HTTP Request Methods from all origins
+            // Accept All HTTP Request Methods from all origins
             //services.AddCors();
 
             // Maintain property names during serialization. See:

@@ -6,9 +6,9 @@ namespace FRS.DataModel.Entities
 {
     public partial class PermissionRole : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
-        public int PermissionID { get; set; }
-        public int RoleID { get; set; }
+        public int Id { get; set; }
+        public int PermissionId { get; set; }
+        public int RoleId { get; set; }
 
         public Permission Permission { get; set; }
         public Role Role { get; set; }
@@ -19,12 +19,12 @@ namespace FRS.DataModel.Entities
             {
                 entity.HasOne(d => d.Permission)
                     .WithMany(p => p.PermissionRoles)
-                    .HasForeignKey(d => d.PermissionID)
+                    .HasForeignKey(d => d.PermissionId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.PermissionRoles)
-                    .HasForeignKey(d => d.RoleID)
+                    .HasForeignKey(d => d.RoleId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

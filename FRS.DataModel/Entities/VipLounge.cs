@@ -7,10 +7,10 @@ namespace FRS.DataModel.Entities
 {
     public partial class VipLounge : AuditInfo, IEntity, IHasId, IHasDescription
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Description { get; set; }
-        public int EventTypeID { get; set; }
-        public int? EventTypeVersionID { get; set; }
+        public int EventTypeId { get; set; }
+        public int? EventTypeVersionId { get; set; }
         public bool IsReleased { get; set; }
         public string Name { get; set; }
         public int SeatsNumber { get; set; }
@@ -19,20 +19,20 @@ namespace FRS.DataModel.Entities
         public decimal Netto { get; set; }
         public decimal Brutto { get; set; }
         public decimal AvailableNettoSum { get; set; }
-        public int? TaxCodeID { get; set; }
-        public int? DepartmentID { get; set; }
-        public int? TeamID { get; set; }
-        public int? SportID { get; set; }
-        public int? CompanyID { get; set; }
-        public int? CostCenterID { get; set; }
+        public int? TaxCodeId { get; set; }
+        public int? DepartmentId { get; set; }
+        public int? TeamId { get; set; }
+        public int? SportId { get; set; }
+        public int? CompanyId { get; set; }
+        public int? CostCenterId { get; set; }
         public string CostCenterText { get; set; }
-        public int? OrderNumberID { get; set; }
+        public int? OrderNumberId { get; set; }
         public string OrderNumberText { get; set; }
         public bool IsEventDatesInitiallyImported { get; set; }
-        public int? SeasonID { get; set; }
-        public int? SourceVipLoungeID { get; set; }
+        public int? SeasonId { get; set; }
+        public int? SourceVipLoungeId { get; set; }
         public bool HasAutoCopy { get; set; }
-        public int? ResponsibleUserID { get; set; }
+        public int? ResponsibleUserId { get; set; }
 
         public ICollection<VipLounge> ChildVipLounges { get; set; } = new HashSet<VipLounge>();
         public ICollection<VipLoungeCostCategory> VipLoungeCostCategories { get; set; } = new HashSet<VipLoungeCostCategory>();
@@ -68,61 +68,61 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.EventType)
                     .WithMany(p => p.VipLounges)
-                    .HasForeignKey(d => d.EventTypeID)
+                    .HasForeignKey(d => d.EventTypeId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.EventTypeVersion)
                     .WithMany(p => p.VipLounges)
-                    .HasForeignKey(d => d.EventTypeVersionID);
+                    .HasForeignKey(d => d.EventTypeVersionId);
 
                 entity.HasOne(d => d.TaxCode)
                     .WithMany(p => p.VipLounges)
-                    .HasForeignKey(d => d.TaxCodeID)
+                    .HasForeignKey(d => d.TaxCodeId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Department)
                     .WithMany(p => p.VipLounges)
-                    .HasForeignKey(d => d.DepartmentID)
+                    .HasForeignKey(d => d.DepartmentId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Team)
                     .WithMany(p => p.VipLounges)
-                    .HasForeignKey(d => d.TeamID)
+                    .HasForeignKey(d => d.TeamId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Sport)
                     .WithMany()
-                    .HasForeignKey(d => d.SportID)
+                    .HasForeignKey(d => d.SportId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Company)
                     .WithMany()
-                    .HasForeignKey(d => d.CompanyID)
+                    .HasForeignKey(d => d.CompanyId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.CostCenter)
                     .WithMany(p => p.VipLounges)
-                    .HasForeignKey(d => d.CostCenterID)
+                    .HasForeignKey(d => d.CostCenterId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.OrderNumber)
                     .WithMany(p => p.VipLounges)
-                    .HasForeignKey(d => d.OrderNumberID)
+                    .HasForeignKey(d => d.OrderNumberId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Season)
                     .WithMany()
-                    .HasForeignKey(d => d.SeasonID)
+                    .HasForeignKey(d => d.SeasonId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.SourceVipLounge)
                     .WithMany(d => d.ChildVipLounges)
-                    .HasForeignKey(d => d.SourceVipLoungeID)
+                    .HasForeignKey(d => d.SourceVipLoungeId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.ResponsibleUser)
                     .WithMany()
-                    .HasForeignKey(d => d.ResponsibleUserID)
+                    .HasForeignKey(d => d.ResponsibleUserId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

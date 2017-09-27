@@ -8,10 +8,10 @@ namespace FRS.DataModel.Entities
 {
     public partial class AttendeeTypeVersion : AuditInfo, IEntity, IHasId, IHasDescription
     {
-        public int ID { get; set; }
-        public int AttendeeTypeID { get; set; }
+        public int Id { get; set; }
+        public int AttendeeTypeId { get; set; }
         public string Description { get; set; }
-        public int EventTypeVersionID { get; set; }
+        public int EventTypeVersionId { get; set; }
         public bool IsDepartmentMandatory { get; set; }
         public bool IsCompanyMandatory { get; set; }
         public bool? IsExternal { get; set; }
@@ -19,7 +19,7 @@ namespace FRS.DataModel.Entities
         public bool IsInvitedPersonAllowed { get; set; }
         public bool? IsTaxRelevant { get; set; }
         public string Tooltip { get; set; }
-        public int? SystemAttendeeTypeID { get; set; }
+        public int? SystemAttendeeTypeId { get; set; }
         public int OrderNumber { get; set; }
         public bool IsSupervisorAllowed { get; set; }
         public bool IsHonoredAllowed { get; set; }
@@ -37,17 +37,17 @@ namespace FRS.DataModel.Entities
             {
                 entity.HasOne(d => d.AttendeeType)
                     .WithMany(p => p.AttendeeTypeVersions)
-                    .HasForeignKey(d => d.AttendeeTypeID)
+                    .HasForeignKey(d => d.AttendeeTypeId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.EventTypeVersion)
                     .WithMany(p => p.AttendeeTypeVersions)
-                    .HasForeignKey(d => d.EventTypeVersionID)
+                    .HasForeignKey(d => d.EventTypeVersionId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.SystemAttendeeType)
                     .WithMany(p => p.AttendeeTypeVersions)
-                    .HasForeignKey(d => d.SystemAttendeeTypeID);
+                    .HasForeignKey(d => d.SystemAttendeeTypeId);
             });
         }
     }

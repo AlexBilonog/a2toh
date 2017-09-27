@@ -54,18 +54,18 @@ namespace FRS.Common
 
         public static void AddOrUpdateSeed<T>(this DbContext context, Func<T, T, bool> predicate = null, params T[] entities) where T : class, IHasId
         {
-            if (entities.Any(r => r.ID == 0) && entities.Any(r => r.ID != 0))
+            if (entities.Any(r => r.Id == 0) && entities.Any(r => r.Id != 0))
                 throw new ArgumentException(nameof(entities));
 
-            var idsFilled = entities.Any(r => r.ID != 0);
+            var idsFilled = entities.Any(r => r.Id != 0);
             if (!idsFilled && predicate == null)
                 throw new ArgumentException(nameof(predicate));
 
             IEnumerable<T> existingEntities;
             if (predicate == null)
             {
-                predicate = (r, e) => e.ID == r.ID;
-                existingEntities = context.Set<T>().Where(r => entities.Any(e => e.ID == r.ID)).ToList();
+                predicate = (r, e) => e.Id == r.Id;
+                existingEntities = context.Set<T>().Where(r => entities.Any(e => e.Id == r.Id)).ToList();
             }
             else
             {

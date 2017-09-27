@@ -6,13 +6,13 @@ namespace FRS.DataModel.Entities
 {
     public partial class EventTypeWorkflowStep : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
-        public int EventTypeID { get; set; }
+        public int Id { get; set; }
+        public int EventTypeId { get; set; }
         public bool? IsActualPhaseThreshold { get; set; }
         public bool? IsBookingSuggestionThreshold { get; set; }
         public string Name { get; set; }
         public int OrderNumber { get; set; }
-        public int WorkflowStepID { get; set; }
+        public int WorkflowStepId { get; set; }
 
         public EventType EventType { get; set; }
         public WorkflowStep WorkflowStep { get; set; }
@@ -27,12 +27,12 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.EventType)
                     .WithMany(p => p.EventTypeWorkflowSteps)
-                    .HasForeignKey(d => d.EventTypeID)
+                    .HasForeignKey(d => d.EventTypeId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.WorkflowStep)
                     .WithMany(p => p.EventTypeWorkflowSteps)
-                    .HasForeignKey(d => d.WorkflowStepID)
+                    .HasForeignKey(d => d.WorkflowStepId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

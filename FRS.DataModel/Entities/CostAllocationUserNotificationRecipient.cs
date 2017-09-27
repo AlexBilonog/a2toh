@@ -7,8 +7,8 @@ namespace FRS.DataModel.Entities
 {
     public partial class CostAllocationUserNotificationRecipient : AuditInfo, IEntity, IHasUser, IHasId
     {
-        public int ID { get; set; }
-        public int UserID { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
 
         public User User { get; set; }
 
@@ -18,7 +18,7 @@ namespace FRS.DataModel.Entities
             {
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.CostAllocationUserNotificationRecipients)
-                    .HasForeignKey(d => d.UserID)
+                    .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

@@ -8,14 +8,14 @@ namespace FRS.DataModel.Entities
 {
     public partial class VipLoungeDocument : AuditInfo, IEntity, IHasUser, IHasId, IHasDescription
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Description { get; set; }
         public string Extension { get; set; }
         public string FileName { get; set; }
         public string Keywords { get; set; }
         public DateTime LastChangeDate { get; set; }
-        public int LastChangeUserID { get; set; }
-        public int VipLoungeID { get; set; }
+        public int LastChangeUserId { get; set; }
+        public int VipLoungeId { get; set; }
 
         public VipLoungeDocumentFile VipLoungeDocumentFile { get; set; }
         public User User { get; set; }
@@ -29,12 +29,12 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.VipLoungeDocuments)
-                    .HasForeignKey(d => d.LastChangeUserID)
+                    .HasForeignKey(d => d.LastChangeUserId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.VipLounge)
                     .WithMany(p => p.VipLoungeDocuments)
-                    .HasForeignKey(d => d.VipLoungeID)
+                    .HasForeignKey(d => d.VipLoungeId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

@@ -2,7 +2,6 @@
 using FRS.Common.Contracts;
 using FRS.Common.Test;
 using FRS.DataAccess.Contracts;
-using FRS.DataModel.Misc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;

@@ -7,11 +7,11 @@ namespace FRS.DataModel.Entities
 {
     public class VipLoungePlace : AuditInfo, IEntity, IHasId, IHasDescription
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }
-        public int DepartmentID { get; set; }
-        public int VipLoungeID { get; set; }
+        public int DepartmentId { get; set; }
+        public int VipLoungeId { get; set; }
 
         public ICollection<AttendeePlaceReservation> AttendeePlaceReservations { get; set; } = new HashSet<AttendeePlaceReservation>();
         public VipLounge VipLounge { get; set; }
@@ -23,12 +23,12 @@ namespace FRS.DataModel.Entities
             {
                 entity.HasOne(d => d.VipLounge)
                     .WithMany(p => p.VipLoungePlaces)
-                    .HasForeignKey(d => d.VipLoungeID)
+                    .HasForeignKey(d => d.VipLoungeId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Department)
                     .WithMany(p => p.VipLoungePlaces)
-                    .HasForeignKey(d => d.DepartmentID)
+                    .HasForeignKey(d => d.DepartmentId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

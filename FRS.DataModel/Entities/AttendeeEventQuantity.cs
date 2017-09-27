@@ -6,9 +6,9 @@ namespace FRS.DataModel.Entities
 {
     public partial class AttendeeEventQuantity : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
-        public int AttendeeTypeVersionID { get; set; }
-        public int EventID { get; set; }
+        public int Id { get; set; }
+        public int AttendeeTypeVersionId { get; set; }
+        public int EventId { get; set; }
         public bool IsPlanned { get; set; }
         public int? Quantity { get; set; }
         public int? QuantityInvitedPersons { get; set; }
@@ -28,12 +28,12 @@ namespace FRS.DataModel.Entities
             {
                 entity.HasOne(d => d.AttendeeTypeVersion)
                     .WithMany(p => p.AttendeeEventQuantities)
-                    .HasForeignKey(d => d.AttendeeTypeVersionID)
+                    .HasForeignKey(d => d.AttendeeTypeVersionId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Event)
                     .WithMany(p => p.AttendeeEventQuantities)
-                    .HasForeignKey(d => d.EventID)
+                    .HasForeignKey(d => d.EventId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

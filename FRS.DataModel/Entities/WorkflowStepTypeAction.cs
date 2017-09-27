@@ -13,10 +13,10 @@ namespace FRS.DataModel.Entities
             EventWorkflowStepHistories = new HashSet<EventWorkflowStepHistory>();
         }
 
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
-        public int WorkflowStepTypeID { get; set; }
+        public int WorkflowStepTypeId { get; set; }
 
         public ICollection<EmailTemplate> EmailTemplates { get; set; }
         public ICollection<EventWorkflowStepHistory> EventWorkflowStepHistories { get; set; }
@@ -34,7 +34,7 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.WorkflowStepType)
                     .WithMany(p => p.WorkflowStepTypeActions)
-                    .HasForeignKey(d => d.WorkflowStepTypeID)
+                    .HasForeignKey(d => d.WorkflowStepTypeId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

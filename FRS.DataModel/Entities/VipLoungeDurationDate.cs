@@ -8,7 +8,7 @@ namespace FRS.DataModel.Entities
 {
     public partial class VipLoungeDurationDate : AuditInfo, IEntity, IHasId, IHasDescription
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public decimal CostCategory1Actual { get; set; }
         public decimal CostCategory1Plan { get; set; }
         public decimal CostCategory2Actual { get; set; }
@@ -18,12 +18,12 @@ namespace FRS.DataModel.Entities
         public decimal? CostCategory4Actual { get; set; }
         public decimal? CostCategory4Plan { get; set; }
         public DateTime? DeclarationDate { get; set; }
-        public int? DeclarationDateID { get; set; }
+        public int? DeclarationDateId { get; set; }
         public string Description { get; set; }
         public bool IsOnhold { get; set; }
         public bool? IsUnavailable { get; set; }
-        public int? UsedInEventID { get; set; }
-        public int VipLoungeID { get; set; }
+        public int? UsedInEventId { get; set; }
+        public int VipLoungeId { get; set; }
         public int? CompetitorId { get; set; }
 
         public ICollection<Event> Events { get; set; } = new HashSet<Event>();
@@ -40,7 +40,7 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.VipLoungeDeclarationDate)
                     .WithMany(p => p.VipLoungeDurationDates)
-                    .HasForeignKey(d => d.DeclarationDateID);
+                    .HasForeignKey(d => d.DeclarationDateId);
 
                 entity.HasOne(d => d.Competitor)
                     .WithMany(p=>p.VipLoungeDurationDates)
@@ -48,11 +48,11 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.Event)
                     .WithMany(p => p.VipLoungeDurationDates)
-                    .HasForeignKey(d => d.UsedInEventID);
+                    .HasForeignKey(d => d.UsedInEventId);
 
                 entity.HasOne(d => d.VipLounge)
                     .WithMany(p => p.VipLoungeDurationDates)
-                    .HasForeignKey(d => d.VipLoungeID)
+                    .HasForeignKey(d => d.VipLoungeId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

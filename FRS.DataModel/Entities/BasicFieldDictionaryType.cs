@@ -6,7 +6,7 @@ namespace FRS.DataModel.Entities
 {
     public partial class BasicFieldDictionaryType : IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public ICollection<AttendeeBasicFieldVersion> AttendeeBasicFieldVersions { get; set; } = new HashSet<AttendeeBasicFieldVersion>();
@@ -16,7 +16,7 @@ namespace FRS.DataModel.Entities
         {
             modelBuilder.Entity<BasicFieldDictionaryType>(entity =>
             {
-                entity.Property(e => e.ID).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Name)
                     .IsRequired()

@@ -6,11 +6,11 @@ namespace FRS.DataModel.Entities
 {
     public partial class WageTypeMapping : AuditInfo, IEntity, IHasId, IHasDescription
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Description { get; set; }
-        public int EventTypeID { get; set; }
+        public int EventTypeId { get; set; }
         public string MappedValue { get; set; }
-        public int WageTypeID { get; set; }
+        public int WageTypeId { get; set; }
 
         public EventType EventType { get; set; }
         public WageType WageType { get; set; }
@@ -23,12 +23,12 @@ namespace FRS.DataModel.Entities
 
                 entity.HasOne(d => d.EventType)
                     .WithMany(p => p.WageTypeMappings)
-                    .HasForeignKey(d => d.EventTypeID)
+                    .HasForeignKey(d => d.EventTypeId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.WageType)
                     .WithMany(p => p.WageTypeMappings)
-                    .HasForeignKey(d => d.WageTypeID)
+                    .HasForeignKey(d => d.WageTypeId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

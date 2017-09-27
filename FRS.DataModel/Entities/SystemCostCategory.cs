@@ -6,7 +6,7 @@ namespace FRS.DataModel.Entities
 {
     public partial class SystemCostCategory : IEntity, IHasId, IHasDescription
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Code { get; set; }
         public string Description { get; set; }
 

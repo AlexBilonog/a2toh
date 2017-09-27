@@ -6,9 +6,9 @@ namespace FRS.DataModel.Entities
 {
     public partial class SocialSecurityReport : AuditInfo, IEntity, IHasId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public DateTime Date { get; set; }
-        public int CompanyID { get; set; }
+        public int CompanyId { get; set; }
         public bool IsTransferredToPayrollSystem { get; set; }
 
         public Company Company { get; set; }
@@ -19,7 +19,7 @@ namespace FRS.DataModel.Entities
             {
                 entity.HasOne(d => d.Company)
                     .WithMany(p => p.SocialSecurityReports)
-                    .HasForeignKey(d => d.CompanyID);
+                    .HasForeignKey(d => d.CompanyId);
             });
         }
     }
