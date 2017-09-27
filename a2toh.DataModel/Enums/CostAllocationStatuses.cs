@@ -1,8 +1,8 @@
-﻿using T4TS;
+﻿//using T4TS;
 
 namespace FRS.Common.Enums
 {
-    [TypeScriptEnum]
+    //[TypeScriptEnum]
     public enum CostAllocationStatuses
     {
         NotCommitted = 1,

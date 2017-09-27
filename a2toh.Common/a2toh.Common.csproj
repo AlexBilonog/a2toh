@@ -8,9 +8,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\a2toh.Common\a2toh.Common.csproj" />
-    <ProjectReference Include="..\a2toh.DataModel\a2toh.DataModel.csproj" />
-  </ItemGroup>
-
 </Project>

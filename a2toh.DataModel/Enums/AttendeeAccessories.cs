@@ -1,8 +1,9 @@
-﻿using T4TS;
+﻿//using T4TS;
 
 namespace FRS.Common.Enums
 {
-    [TypeScriptEnum]
+    //TODO
+    //[TypeScriptEnum]
     public enum AttendeeAccessories
     {
         External = 1,

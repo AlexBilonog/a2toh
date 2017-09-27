@@ -1,6 +1,5 @@
 using FRS.Common;
 using FRS.Common.Contracts;
-using FRS.DataModel.Contracts.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Logging;
@@ -9,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using FRS.DataModel.Misc;
 
 namespace FRS.DataModel
 {
@@ -34,13 +34,6 @@ namespace FRS.DataModel
             {
                 var entity = (IEntity)Activator.CreateInstance(entityType);
                 entity.Configure(modelBuilder);
-            }
-
-            entityTypes = Assembly.GetExecutingAssembly().GetTypes().Where(r => r.IsClass && typeof(IEntityEx).IsAssignableFrom(r));
-            foreach (var entityType in entityTypes)
-            {
-                var entity = (IEntityEx)Activator.CreateInstance(entityType);
-                entity.ConfigureEx(modelBuilder);
             }
 
 #if DEBUG
