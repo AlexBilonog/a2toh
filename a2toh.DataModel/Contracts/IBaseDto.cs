@@ -1,4 +1,4 @@
-﻿namespace EventManager.DataModel.Contracts
+﻿namespace FRS.DataModel.Contracts
 {
     public interface IBaseDto
     {

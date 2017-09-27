@@ -1,9 +1,9 @@
-using EventManager.Common.Contracts;
-using EventManager.DataModel.Contracts;
+using FRS.Common.Contracts;
+using FRS.DataModel.Contracts;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace EventManager.DataModel.Entities
+namespace FRS.DataModel.Entities
 {
     public partial class UserPassword : AuditInfo, IEntity, IHasUser, IHasId
     {

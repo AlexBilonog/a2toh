@@ -1,12 +1,12 @@
-﻿using EventManager.Common;
-using EventManager.Common.Contracts;
+﻿using FRS.Common;
+using FRS.Common.Contracts;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 
-namespace EventManager.DataAccess.Contracts
+namespace FRS.DataAccess.Contracts
 {
     public interface IUnitOfWork
     {

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace EventManager.Web.Contracts
+namespace FRS.Web.Contracts
 {
     public interface IHaveCustomMappings
     {

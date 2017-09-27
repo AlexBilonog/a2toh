@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using EventManager.Common.Contracts;
-using EventManager.DataModel.Enums;
+using FRS.Common.Contracts;
+using FRS.DataModel.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace EventManager.DataModel.Entities
+namespace FRS.DataModel.Entities
 {
     public partial class Competitor : AuditInfo, IEntity, IHasId
     {

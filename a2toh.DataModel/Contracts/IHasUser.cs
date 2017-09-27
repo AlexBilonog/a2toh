@@ -1,7 +1,7 @@
-﻿using EventManager.Common.Contracts;
-using EventManager.DataModel.Entities;
+﻿using FRS.Common.Contracts;
+using FRS.DataModel.Entities;
 
-namespace EventManager.DataModel.Contracts
+namespace FRS.DataModel.Contracts
 {
     public interface IHasUser: IEntity
     {

@@ -1,13 +1,13 @@
-using EventManager.Common;
-using EventManager.DataModel.Entities;
+using FRS.Common;
+using FRS.DataModel.Entities;
 
-namespace EventManager.DataModel
+namespace FRS.DataModel
 {
     public class SeedData
     {
         public void Seed()
         {
-            using (var context = new EventManagerEntities())
+            using (var context = new FRSDbContext())
             {
                 context.AddOrUpdateSeed(null,
                     new AttendeeAccessory { ID = 1, Name = "External" },

@@ -1,9 +1,9 @@
-using EventManager.Common.Contracts;
+using FRS.Common.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Collections.Generic;
 
-namespace EventManager.DataModel.Entities
+namespace FRS.DataModel.Entities
 {
     public partial class AgendaCommonProgramVersion : AuditInfo, IEntity, IHasId, IHasDescription
     {

@@ -1,7 +1,7 @@
-using EventManager.Common;
-using EventManager.Common.Contracts;
-using EventManager.Common.Test;
-using EventManager.DataModel.Contracts.Infrastructure;
+using FRS.Common;
+using FRS.Common.Contracts;
+using FRS.Common.Test;
+using FRS.DataModel.Contracts.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Logging;
@@ -11,17 +11,17 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace EventManager.DataModel
+namespace FRS.DataModel
 {
-    public class EventManagerEntities : DbContext
+    public class FRSDbContext : DbContext
     {
-        public EventManagerEntities()
+        public FRSDbContext()
         {
             if (!TestEnvironment.IsSet)
                 Database.SetCommandTimeout(600);
         }
 
-        public EventManagerEntities(DbContextOptions<EventManagerEntities> options)
+        public FRSDbContext(DbContextOptions<FRSDbContext> options)
             : base(options)
         {
             if (!TestEnvironment.IsSet)

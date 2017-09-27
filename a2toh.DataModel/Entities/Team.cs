@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using EventManager.Common.Contracts;
+using FRS.Common.Contracts;
 using Microsoft.EntityFrameworkCore;
 
-namespace EventManager.DataModel.Entities
+namespace FRS.DataModel.Entities
 {
     public partial class Team : AuditInfo, IHasId, IHasActiveState
     {

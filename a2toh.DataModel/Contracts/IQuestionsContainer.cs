@@ -1,7 +1,7 @@
-﻿using EventManager.Business.Scripting.Dto;
+﻿using FRS.Business.Scripting.Dto;
 using System.Collections.Generic;
 
-namespace EventManager.Business.Scripting.Contracts
+namespace FRS.Business.Scripting.Contracts
 {
     public interface IQuestionsContainer
     {

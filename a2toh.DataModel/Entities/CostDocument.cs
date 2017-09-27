@@ -1,10 +1,10 @@
-using EventManager.Common.Contracts;
-using EventManager.DataModel.Contracts;
+using FRS.Common.Contracts;
+using FRS.DataModel.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 
-namespace EventManager.DataModel.Entities
+namespace FRS.DataModel.Entities
 {
     public partial class CostDocument : AuditInfo, IEntity, IHasUser, IHasId, IHasDescription
     {

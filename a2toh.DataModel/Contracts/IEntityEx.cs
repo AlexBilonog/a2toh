@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace EventManager.DataModel.Contracts.Infrastructure
+namespace FRS.DataModel.Contracts.Infrastructure
 {
     public interface IEntityEx
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace EventManager.Common.Contracts
+namespace FRS.Common.Contracts
 {
     public interface IHasActiveState:IEntity
     {

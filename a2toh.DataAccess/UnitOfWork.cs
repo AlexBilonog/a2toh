@@ -1,6 +1,6 @@
-﻿using EventManager.Common;
-using EventManager.Common.Contracts;
-using EventManager.DataAccess.Contracts;
+﻿using FRS.Common;
+using FRS.Common.Contracts;
+using FRS.DataAccess.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
@@ -9,9 +9,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using EventManager.Common.Test;
+using FRS.Common.Test;
 
-namespace EventManager.DataAccess
+namespace FRS.DataAccess
 {
     public class UnitOfWork : IUnitOfWork
     {

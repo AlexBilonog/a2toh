@@ -1,5 +1,5 @@
 ﻿
-namespace EventManager.Business.Scripting.Contracts
+namespace FRS.Business.Scripting.Contracts
 {
     public interface ICostQuestionNode
     {

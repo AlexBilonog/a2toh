@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace EventManager.DataAccess.Contracts
+namespace FRS.DataAccess.Contracts
 {
     public interface IRepository<T> where T : class
     {

@@ -1,10 +1,10 @@
-using EventManager.Common.Contracts;
+using FRS.Common.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 using System.Collections.Generic;
 
-namespace EventManager.DataModel.Entities
+namespace FRS.DataModel.Entities
 {
     public partial class Cost : AuditInfo, IEntity, IHasId
     {

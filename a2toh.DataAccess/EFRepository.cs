@@ -1,6 +1,6 @@
-﻿using EventManager.Common;
-using EventManager.Common.Contracts;
-using EventManager.DataAccess.Contracts;
+﻿using FRS.Common;
+using FRS.Common.Contracts;
+using FRS.DataAccess.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace EventManager.DataAccess
+namespace FRS.DataAccess
 {
     internal class EFRepository<T> : IRepository<T> where T : class, IEntity
     {
