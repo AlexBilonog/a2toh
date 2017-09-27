@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <DefaultItemExcludes>node_modules/**;wwwroot/node_modules/**;$(DefaultItemExcludes)</DefaultItemExcludes>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,11 +27,11 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="ren web.config web.config2" />
+    <Exec Command="if exist web.config (&#xD;&#xA;  ren web.config web.config2&#xD;&#xA;)" />
   </Target>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="ren web.config2 web.config" />
+    <Exec Command="if exist web.config2 (&#xD;&#xA;  ren web.config2 web.config&#xD;&#xA;)" />
   </Target>
 
 </Project>

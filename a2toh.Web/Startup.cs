@@ -18,6 +18,12 @@ namespace a2toh.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            //loggerFactory.AddDebug();
+
+            //Accept All HTTP Request Methods from all origins
+            //services.AddCors();
+
             // Maintain property names during serialization. See:
             // https://github.com/aspnet/Announcements/issues/194
             services

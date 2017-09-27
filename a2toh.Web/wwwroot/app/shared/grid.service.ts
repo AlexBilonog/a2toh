@@ -52,7 +52,7 @@ export class GridService extends BehaviorSubject<any[]> {
             .get(`${this.BASE_URL}?${queryStr}`) // Send the state to the server
             .map(response => response.json())
             .map(({ Data, Total, AggregateResults }) => {// Process the response
-                console.log(Data, Total);
+                this.data = Data;
                 this.originalData = cloneData(Data);
 
                 return (<GridDataResult>{
@@ -66,15 +66,14 @@ export class GridService extends BehaviorSubject<any[]> {
     }
 
     public create(item: any): void {
-        console.log('create');
-        this.createdItems.push(item);
+        item.ProductID = 0;
+        this.createdItems.push(item);        
         this.data.unshift(item);
 
-        super.next(this.data);
+        //super.next(this.data);
     }
 
     public update(item: any): void {
-        console.log('update');
         if (!this.isNew(item)) {
             let index = itemIndex(item, this.updatedItems);
             if (index !== -1) {
@@ -89,7 +88,6 @@ export class GridService extends BehaviorSubject<any[]> {
     }
 
     public remove(item: any): void {
-        console.log('delete');
         let index = itemIndex(item, this.data);
         this.data.splice(index, 1);
 
@@ -105,7 +103,7 @@ export class GridService extends BehaviorSubject<any[]> {
             this.updatedItems.splice(index, 1);
         }
 
-        super.next(this.data);
+        //super.next(this.data);
     }
 
     public isNew(item: any): boolean {
@@ -134,7 +132,7 @@ export class GridService extends BehaviorSubject<any[]> {
             completed.push(this.edit(DELETE_ACTION, this.deletedItems));
         }
 
-        this.reset();
+        //this.reset();
 
         console.log(new Date().toISOString());
         Observable.zip(...completed).subscribe(() => {
@@ -146,7 +144,7 @@ export class GridService extends BehaviorSubject<any[]> {
     public cancelChanges(): void {
         this.reset();
 
-        this.data = this.originalData;
+        this.data.push(...this.originalData);
         this.originalData = cloneData(this.originalData);
         super.next(this.data);
     }
@@ -156,7 +154,8 @@ export class GridService extends BehaviorSubject<any[]> {
     }
 
     private reset() {
-        this.data = [];
+        //this.data = [];
+        this.data.length = 0;
         this.createdItems = [];
         this.updatedItems = [];
         this.deletedItems = [];
