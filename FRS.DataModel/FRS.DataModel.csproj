@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\a2toh.Common\a2toh.Common.csproj" />
+    <ProjectReference Include="..\FRS.Common\FRS.Common.csproj" />
   </ItemGroup>
 
 </Project>

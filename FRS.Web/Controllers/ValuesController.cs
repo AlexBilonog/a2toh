@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace a2toh.Web.Controllers
+namespace FRS.Web.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller

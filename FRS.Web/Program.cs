@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace a2toh.Web
+namespace FRS.Web
 {
     public class Program
     {

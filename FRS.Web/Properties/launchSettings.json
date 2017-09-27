@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "a2toh.Web": {
+    "FRS.Web": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
