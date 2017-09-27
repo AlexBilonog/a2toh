@@ -1,7 +1,7 @@
 ﻿
 namespace FRS.Common.Contracts
 {
-    public interface IHasActiveState:IEntity
+    public interface IHasIsActive : IEntity
     {
         bool IsActive { get; set; }
     }

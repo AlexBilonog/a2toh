@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FRS.DataModel.Entities
 {
-    public partial class OrderNumber : AuditInfo, IHasId, IHasActiveState
+    public partial class OrderNumber : AuditInfo, IHasId, IHasIsActive
     {
         public OrderNumber()
         {

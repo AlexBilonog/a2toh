@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FRS.DataModel.Entities
 {
-    public partial class EventType : AuditInfo, IEntity, IHasActiveState, IHasId
+    public partial class EventType : AuditInfo, IEntity, IHasIsActive, IHasId
     {
         public int Id { get; set; }
         public string Code { get; set; }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FRS.DataModel.Entities
 {
-    public partial class Sport : AuditInfo, IEntity, IHasId, IHasActiveState
+    public partial class Sport : AuditInfo, IEntity, IHasId, IHasIsActive
     {
         public int Id { get; set; }
         public string Name { get; set; }

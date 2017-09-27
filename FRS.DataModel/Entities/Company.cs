@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FRS.DataModel.Entities
 {
-    public partial class Company : AuditInfo, IEntity, IHasActiveState, IHasId, IHasDescription
+    public partial class Company : AuditInfo, IEntity, IHasIsActive, IHasId, IHasDescription
     {
         public Company()
         {

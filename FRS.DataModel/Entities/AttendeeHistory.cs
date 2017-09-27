@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace FRS.DataModel.Entities
 {
-    public partial class AttendeeHistory : AuditInfo, IEntity, IHasActiveState, IHasId
+    public partial class AttendeeHistory : AuditInfo, IEntity, IHasIsActive, IHasId
     {
         public int Id { get; set; }
         public int AttendeeAccessoryId { get; set; }

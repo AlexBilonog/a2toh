@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FRS.DataModel.Entities
 {
-    public partial class Team : AuditInfo, IHasId, IHasActiveState
+    public partial class Team : AuditInfo, IHasId, IHasIsActive
     {
         public Team()
         {

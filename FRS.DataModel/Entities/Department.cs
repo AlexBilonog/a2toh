@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace FRS.DataModel.Entities
 {
-    public partial class Department : AuditInfo, IEntity, IHasActiveState, IHasId, IHasDescription
+    public partial class Department : AuditInfo, IEntity, IHasIsActive, IHasId, IHasDescription
     {
         public Department()
         {

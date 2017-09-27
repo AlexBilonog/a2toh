@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FRS.DataModel.Entities
 {
-    public partial class CostCenter : AuditInfo, IEntity, IHasActiveState, IHasId, IHasDescription
+    public partial class CostCenter : AuditInfo, IEntity, IHasIsActive, IHasId, IHasDescription
     {
         public CostCenter()
         {
