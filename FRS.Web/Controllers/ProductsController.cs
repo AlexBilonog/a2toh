@@ -1,14 +1,17 @@
-﻿using Kendo.Mvc.Extensions;
+﻿using FRS.DataModel;
+using FRS.DataModel.Entities;
+using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Angular2Spa.Controllers
 {
     [Route("api/[controller]")]
     public class ProductsController : Controller
     {
-        //private readonly SampleContext _context;
+        private readonly FRSDbContext _context;
 
         private static List<Product> _products = new List<Product>
         {
@@ -329,10 +332,10 @@ namespace Angular2Spa.Controllers
             },
         };
 
-        //public ProductsController(SampleContext context)
-        //{
-        //    _context = context;
-        //}
+        public ProductsController(FRSDbContext context)
+        {
+            _context = context;
+        }
 
         public class Product
         {
@@ -346,6 +349,7 @@ namespace Angular2Spa.Controllers
         [HttpGet]
         public DataSourceResult GetProducts([DataSourceRequest]DataSourceRequest request)
         {
+            var users = _context.Set<User>().ToList();
             return _products.ToDataSourceResult(request);
         }
 

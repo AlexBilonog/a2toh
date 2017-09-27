@@ -14,7 +14,7 @@ namespace FRS.Common
             {
                 //TODO
                 return null;
-                //return Environment.GetEnvironmentVariable("ConnectionString") ?? ConfigurationManager.ConnectionStrings["EventManagerEF"].ConnectionString;
+                //return Environment.GetEnvironmentVariable("ConnectionString") ?? ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             }
         }
 

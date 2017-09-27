@@ -27,6 +27,10 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FRS.DataModel\FRS.DataModel.csproj" />
+  </ItemGroup>
+
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="if exist web.config (&#xD;&#xA;  ren web.config web.config2&#xD;&#xA;)" />
   </Target>

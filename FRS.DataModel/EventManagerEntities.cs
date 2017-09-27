@@ -1,5 +1,6 @@
 using FRS.Common;
 using FRS.Common.Contracts;
+using FRS.DataModel.Misc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Logging;
@@ -8,7 +9,6 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using FRS.DataModel.Misc;
 
 namespace FRS.DataModel
 {
@@ -47,7 +47,6 @@ namespace FRS.DataModel
             if (TestEnvironment.IsSet)
                 return;
 
-            optionsBuilder.UseSqlServer(EfHelper.ConnectionString);
             optionsBuilder.EnableSensitiveDataLogging(); // suggestion in exceptions to show more info (parameters, etc for at development)
         }
 

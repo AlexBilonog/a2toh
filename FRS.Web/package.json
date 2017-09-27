@@ -1,7 +1,6 @@
 {
-  "name": "angular-quickstart",
+  "name": "frs",
   "version": "1.0.0",
-  "description": "QuickStart package.json from the documentation, supplemented with testing support",
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc -w",
