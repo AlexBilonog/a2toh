@@ -1,7 +1,6 @@
-﻿
-namespace FRS.Common.Contracts
+﻿namespace FRS.DataModel.Contracts
 {
-    public interface IHasIsActive : IEntity
+    public interface IHasIsActive
     {
         bool IsActive { get; set; }
     }

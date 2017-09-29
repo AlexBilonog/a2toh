@@ -1,5 +1,4 @@
-﻿
-namespace FRS.Common.Contracts
+﻿namespace FRS.DataModel.Contracts
 {
     public interface IHasDescription
     {

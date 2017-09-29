@@ -1,6 +1,6 @@
 ﻿//using AutoMapper;
 
-namespace FRS.Web.Contracts
+namespace FRS.Common.Contracts
 {
     public interface IHasCustomMappings
     {

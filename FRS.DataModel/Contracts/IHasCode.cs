@@ -1,4 +1,4 @@
-﻿namespace FRS.Business.Scripting.Contracts
+﻿namespace FRS.DataModel.Contracts
 {
     public interface IHasCode
     {
