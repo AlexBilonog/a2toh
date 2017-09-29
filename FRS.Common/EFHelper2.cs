@@ -6,50 +6,40 @@ using System.Linq;
 
 namespace FRS.Common
 {
-    public static class EfHelper
+    public static class EFHelper
     {
-        public static string ConnectionString
-        {
-            get
-            {
-                //TODO
-                return null;
-                //return Environment.GetEnvironmentVariable("ConnectionString") ?? ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            }
-        }
-
         public static void ApplyAuditRules(this DbContext context)
         {
-            var entries = context.ChangeTracker.Entries();
-            foreach (var entry in entries
-                .Where(e => e.Entity is AuditInfo &&
-                (e.State == EntityState.Added || e.State == EntityState.Modified)))
-            {
-                var entity = (AuditInfo)entry.Entity;
-                if (entity == null) continue;
+            //var entries = context.ChangeTracker.Entries();
+            //foreach (var entry in entries
+            //    .Where(e => e.Entity is AuditInfo &&
+            //    (e.State == EntityState.Added || e.State == EntityState.Modified)))
+            //{
+            //    var entity = (AuditInfo)entry.Entity;
+            //    if (entity == null) continue;
 
-                string currentUserName = string.Empty;
+            //    string currentUserName = string.Empty;
 
-                //TODO
-                currentUserName = "em_admin@evolvice.de";// AppSecurityContext.UserName ?? "__service";
+            //    //TODO
+            //    currentUserName = "em_admin@evolvice.de";// AppSecurityContext.UserName ?? "__service";
 
-                if (string.IsNullOrEmpty(currentUserName))
-                    currentUserName = "__webanonymous";
+            //    if (string.IsNullOrEmpty(currentUserName))
+            //        currentUserName = "__webanonymous";
 
-                if (entry.State == EntityState.Added)
-                {
-                    entity.CreationDateTime = DateTime.UtcNow;
-                    entity.CreationUser = currentUserName;
-                }
-                else
-                {
-                    context.Entry(entity).Property(x => x.CreationDateTime).IsModified = false;
-                    context.Entry(entity).Property(x => x.CreationUser).IsModified = false;
-                }
+            //    if (entry.State == EntityState.Added)
+            //    {
+            //        entity.CreationDateTime = DateTime.UtcNow;
+            //        entity.CreationUser = currentUserName;
+            //    }
+            //    else
+            //    {
+            //        context.Entry(entity).Property(x => x.CreationDateTime).IsModified = false;
+            //        context.Entry(entity).Property(x => x.CreationUser).IsModified = false;
+            //    }
 
-                entity.LastModificationDateTime = DateTime.UtcNow;
-                entity.LastModificationUser = currentUserName;
-            }
+            //    entity.LastModificationDateTime = DateTime.UtcNow;
+            //    entity.LastModificationUser = currentUserName;
+            //}
         }
 
         public static void AddOrUpdateSeed<T>(this DbContext context, Func<T, T, bool> predicate = null, params T[] entities) where T : class, IHasId

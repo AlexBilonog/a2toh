@@ -1,5 +1,5 @@
 ﻿import { Component, /*Observable,*/ OnInit, Validators, FormBuilder, GridDataResult, State } from '../index';
-import { GridService } from '../shared/grid.service';
+import { GridService } from '../common/grid.service';
 import { Product } from './product';
 
 @Component({

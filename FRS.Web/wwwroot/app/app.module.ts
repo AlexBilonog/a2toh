@@ -10,8 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { JsonpModule } from '@angular/http';
-import { GridService } from './shared/grid.service';
-import { Grid2Service } from './shared/grid2.service';
+import { GridService } from './common/grid.service';
+import { Grid2Service } from './common/grid2.service';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './hero/dashboard.component';

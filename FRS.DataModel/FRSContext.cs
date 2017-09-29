@@ -48,7 +48,7 @@ namespace FRS.DataModel
         {
             try
             {
-                EfHelper.ApplyAuditRules(this);
+                EFHelper.ApplyAuditRules(this);
                 var saved = base.SaveChanges();
                 return saved;
             }
@@ -60,7 +60,7 @@ namespace FRS.DataModel
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            EfHelper.ApplyAuditRules(this);
+            EFHelper.ApplyAuditRules(this);
             return base.SaveChangesAsync(cancellationToken);
         }
     }

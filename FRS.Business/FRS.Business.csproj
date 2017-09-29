@@ -4,4 +4,12 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2017.3.913" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FRS.DataModel\FRS.DataModel.csproj" />
+  </ItemGroup>
+
 </Project>

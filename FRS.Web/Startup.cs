@@ -1,4 +1,6 @@
-﻿using FRS.Common;
+﻿using FRS.Business.Products;
+using FRS.Business.Users;
+using FRS.Common;
 using FRS.DataModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,9 +14,19 @@ namespace FRS.Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IHostingEnvironment env)
+        //public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            var contentRootPath = env.ContentRootPath;
+
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(contentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+
+            builder.AddEnvironmentVariables();
+            Configuration = builder.Build();
+            //Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -38,6 +50,9 @@ namespace FRS.Web
 
             // Add Kendo UI services to the services container
             services.AddKendo();
+
+            services.AddTransient<IProductsService, ProductsService>();
+            services.AddTransient<IUsersService, UsersService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
