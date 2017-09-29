@@ -17,22 +17,22 @@ namespace FRS.Business.Products
 
         public DataSourceResult GetProducts(DataSourceRequest request)
         {
-            return Context.Set<User>().ToDataSourceResult(request);
+            return Context.Set<Product>().ToDataSourceResult(request);
         }
 
         public IEnumerable<ProductDto> CreateProducts(IEnumerable<ProductDto> dtos)
         {
-            return CreateEntitiesForGrid<User, ProductDto>(dtos);
+            return CreateEntitiesForGrid<Product, ProductDto>(dtos);
         }
 
         public IEnumerable<ProductDto> UpdateProducts(IEnumerable<ProductDto> dtos)
         {
-            return UpdateEntitiesForGrid<User, ProductDto>(dtos);
+            return UpdateEntitiesForGrid<Product, ProductDto>(dtos);
         }
 
         public void DeleteProducts(IEnumerable<ProductDto> dtos)
         {
-            DeleteEntitiesForGrid<User, ProductDto>(dtos);
+            DeleteEntitiesForGrid<Product, ProductDto>(dtos);
         }
     }
 }

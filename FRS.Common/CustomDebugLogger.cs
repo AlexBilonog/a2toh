@@ -46,29 +46,6 @@ namespace FRS.Common
                 Debug.WriteLine(str);
             }
         }
-
-        private static string SqlEncode(object value)
-        {
-            if (value == null)
-                return "null";
-            else if (value is DBNull)
-                return "null";
-            else if (value is DateTime?)
-                return "'" + ((DateTime?)value).Value.ToString("yyyy-MM-ddThh:mm:ss.fff") + "'";
-            else if (value is string)
-                return "N'" + value.ToString().Replace("'", "''") + "'";
-            else if (value is Enum)
-                return (int)value + "/*" + value + "*/";
-            else // bool, int
-            {
-                var s = value.ToString();
-                if (s == "True")
-                    s = "1";
-                if (s == "False")
-                    s = "0";
-                return s;
-            }
-        }
     }
 
     internal class FakeDisposable : IDisposable

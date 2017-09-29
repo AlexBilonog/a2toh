@@ -1,4 +1,6 @@
-﻿using FRS.Business.Products;
+﻿using AutoMapper;
+using FRS.Business.Common;
+using FRS.Business.Products;
 using FRS.Business.Users;
 using FRS.Common;
 using FRS.DataModel;
@@ -51,8 +53,13 @@ namespace FRS.Web
             // Add Kendo UI services to the services container
             services.AddKendo();
 
+            services.AddScoped<DbContext, FRSContext>();
+            services.AddTransient<ICacheProvider, CacheProvider>();
             services.AddTransient<IProductsService, ProductsService>();
             services.AddTransient<IUsersService, UsersService>();
+
+            //TODO
+            Mapper.Initialize(config => { });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
