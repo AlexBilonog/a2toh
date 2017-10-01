@@ -41,7 +41,7 @@ namespace FRS.Common
             IsActive = true;
             IsRecreate = (args.ElementAtOrDefault(1) == "1");
             if (IsRecreate)
-                WriteLine(nameof(IsRecreate) + ": " + IsRecreate, ConsoleColor.Red);
+                WriteLine(nameof(IsRecreate) + ": true", ConsoleColor.Red);
 
             if (IsActive)
                 SetEnvironmentVariable();
