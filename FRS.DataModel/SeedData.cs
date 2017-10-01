@@ -1,13 +1,14 @@
 using FRS.Common;
 using FRS.DataModel.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace FRS.DataModel
 {
-    public class SeedData
+    public static class SeedData
     {
-        public void Seed()
+        public static void Apply(DbContext context)
         {
-            using (var context = new FRSContext())
+            using (context)
             {
                 context.AddOrUpdateSeed(null,
                     new User

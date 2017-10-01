@@ -16,8 +16,9 @@ namespace FRS.Web
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IHostingEnvironment env)
-        //public Startup(IConfiguration configuration)
         {
             var contentRootPath = env.ContentRootPath;
 
@@ -28,18 +29,20 @@ namespace FRS.Web
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
-            //Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddLogging(options => options.AddProvider(new CustomDebugLoggerProvider()));
 
-            services.AddDbContext<FRSContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            if (MigrationHelper.IsActive)
+                MigrationHelper.ConvertToIntegratedSecurity(ref connectionString);
+
+            services.AddDbContext<FRSContext>(options => options
+                .UseSqlServer(connectionString)
+                .EnableSensitiveDataLogging());
 
             // Accept All HTTP Request Methods from all origins
             //services.AddCors();
@@ -95,6 +98,9 @@ namespace FRS.Web
 
             // Configure Kendo UI
             app.UseKendo(env);
+
+            if (MigrationHelper.IsActive)
+                MigrationHelper.Init(app, SeedData.Apply);
         }
     }
 }

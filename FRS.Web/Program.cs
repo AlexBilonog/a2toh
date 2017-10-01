@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore;
+﻿using FRS.Common;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
 namespace FRS.Web
@@ -7,7 +8,17 @@ namespace FRS.Web
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            MigrationHelper.ReadArguments(ref args);
+
+            var webHost = BuildWebHost(args);
+
+            if (MigrationHelper.IsActive)
+            {
+                MigrationHelper.Run();
+                return;
+            }
+
+            webHost.Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

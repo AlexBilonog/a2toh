@@ -1,6 +1,5 @@
 using FRS.Common;
 using FRS.Common.Contracts;
-using FRS.Common.Test;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -12,13 +11,6 @@ namespace FRS.DataModel
 {
     public class FRSContext : DbContext
     {
-        public FRSContext()
-        {
-            if (!TestEnvironment.IsSet)
-                Database.SetCommandTimeout(600); //TODO move to connections string?
-        }
-
-        //TODO is it still needed? Maybe for tests?
         public FRSContext(DbContextOptions<FRSContext> options)
             : base(options)
         {
@@ -34,14 +26,6 @@ namespace FRS.DataModel
                 var entity = (IEntity)Activator.CreateInstance(entityType);
                 entity.Configure(modelBuilder);
             }
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (TestEnvironment.IsSet)
-                return;
-
-            optionsBuilder.EnableSensitiveDataLogging(); // suggestion in exceptions to show more info (parameters, etc for at development)
         }
 
         public override int SaveChanges()
