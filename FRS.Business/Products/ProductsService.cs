@@ -1,6 +1,5 @@
 ﻿using FRS.Business.Common;
 using FRS.DataModel.Entities;
-using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -17,7 +16,7 @@ namespace FRS.Business.Products
 
         public DataSourceResult GetProducts(DataSourceRequest request)
         {
-            return Context.Set<Product>().ToDataSourceResult(request);
+            return GetEntitiesForGrid<Product, ProductDto>(request);
         }
 
         public IEnumerable<ProductDto> CreateProducts(IEnumerable<ProductDto> dtos)

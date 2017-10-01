@@ -25,7 +25,9 @@ namespace FRS.Common
             if (args == null || args.Length == 0)
                 return;
 
-            if (args[0] != "migrate" || args.Length == 2 && args[1] != "1" || args.Length > 2)
+            if (args[0] != "migrate"
+                || args.Length == 2 && args[1] != "0" && args[1] != "1"
+                || args.Length > 2)
             {
                 WriteLine("Possible arguments:");
                 WriteLine("\tmigrate - apply migrations");

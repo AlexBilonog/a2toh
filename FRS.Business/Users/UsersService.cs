@@ -1,6 +1,5 @@
 ﻿using FRS.Business.Common;
 using FRS.DataModel.Entities;
-using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -17,7 +16,7 @@ namespace FRS.Business.Users
 
         public DataSourceResult GetUsers(DataSourceRequest request)
         {
-            return Context.Set<User>().ToDataSourceResult(request);
+            return GetEntitiesForGrid<User, UserDto>(request);
         }
 
         public IEnumerable<UserDto> CreateUsers(IEnumerable<UserDto> dtos)

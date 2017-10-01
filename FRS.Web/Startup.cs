@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using FRS.Business.Common;
+﻿using FRS.Business.Common;
 using FRS.Business.Products;
 using FRS.Business.Users;
 using FRS.Common;
@@ -60,9 +59,6 @@ namespace FRS.Web
             services.AddTransient<ICacheProvider, CacheProvider>();
             services.AddTransient<IProductsService, ProductsService>();
             services.AddTransient<IUsersService, UsersService>();
-
-            //TODO
-            Mapper.Initialize(config => { });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -101,6 +97,8 @@ namespace FRS.Web
 
             if (MigrationHelper.IsActive)
                 MigrationHelper.Init(app, SeedData.Apply);
+
+            AutoMapperHelper.Configure();
         }
     }
 }

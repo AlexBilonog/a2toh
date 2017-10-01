@@ -1,6 +1,6 @@
 ﻿namespace FRS.Common.Contracts
 {
-    public interface IMapFrom<TEntity>
+    public interface IMapsFrom<TEntity>
     {
     }
 }

@@ -19,21 +19,12 @@ const CREATE_ACTION = 'create';
 const UPDATE_ACTION = 'update';
 const DELETE_ACTION = 'destroy';
 
-const itemIndex = (item: any, data: any[]): number => {
-    for (let idx = 0; idx < data.length; idx++) {
-        if (data[idx].ProductID === item.ProductID) {
-            return idx;
-        }
-    }
-
-    return -1;
-};
-
-const cloneData = (data: any[]) => data.map(item => Object.assign({}, item));
-
 @Injectable()
 export class GridService extends BehaviorSubject<any[]> {
-    private BASE_URL: string = 'api/Products';
+    private baseUrl = 'api/';
+    public url: string;
+    public idField = 'Id';
+
     private data: any[] = [];
     private originalData: any[] = [];
     private createdItems: any[] = [];
@@ -49,11 +40,11 @@ export class GridService extends BehaviorSubject<any[]> {
         let hasGroups = state.group && state.group.length;
 
         return this.http
-            .get(`${this.BASE_URL}?${queryStr}`) // Send the state to the server
+            .get(`${this.baseUrl + this.url}?${queryStr}`) // Send the state to the server
             .map(response => response.json())
             .map(({ Data, Total, AggregateResults }) => {// Process the response
                 this.data = Data;
-                this.originalData = cloneData(Data);
+                this.originalData = this.cloneData(Data);
 
                 return (<GridDataResult>{
                     // If there are groups, convert them to a compatible format
@@ -66,7 +57,7 @@ export class GridService extends BehaviorSubject<any[]> {
     }
 
     public create(item: any): void {
-        item.ProductID = 0;
+        item[this.idField] = 0;
         this.createdItems.push(item);        
         this.data.unshift(item);
 
@@ -75,30 +66,30 @@ export class GridService extends BehaviorSubject<any[]> {
 
     public update(item: any): void {
         if (!this.isNew(item)) {
-            let index = itemIndex(item, this.updatedItems);
+            let index = this.itemIndex(item, this.updatedItems);
             if (index !== -1) {
                 this.updatedItems.splice(index, 1, item);
             } else {
                 this.updatedItems.push(item);
             }
         } else {
-            let index = itemIndex(item, this.createdItems);
+            let index = this.itemIndex(item, this.createdItems);
             this.createdItems.splice(index, 1, item);
         }
     }
 
     public remove(item: any): void {
-        let index = itemIndex(item, this.data);
+        let index = this.itemIndex(item, this.data);
         this.data.splice(index, 1);
 
-        index = itemIndex(item, this.createdItems);
+        index = this.itemIndex(item, this.createdItems);
         if (index >= 0) {
             this.createdItems.splice(index, 1);
         } else {
             this.deletedItems.push(item);
         }
 
-        index = itemIndex(item, this.updatedItems);
+        index = this.itemIndex(item, this.updatedItems);
         if (index >= 0) {
             this.updatedItems.splice(index, 1);
         }
@@ -107,7 +98,7 @@ export class GridService extends BehaviorSubject<any[]> {
     }
 
     public isNew(item: any): boolean {
-        return !item.ProductID;
+        return !item[this.idField];
     }
 
     public hasChanges(): boolean {
@@ -145,7 +136,7 @@ export class GridService extends BehaviorSubject<any[]> {
         this.reset();
 
         this.data.push(...this.originalData);
-        this.originalData = cloneData(this.originalData);
+        this.originalData = this.cloneData(this.originalData);
         super.next(this.data);
     }
 
@@ -168,21 +159,23 @@ export class GridService extends BehaviorSubject<any[]> {
                     action === DELETE_ACTION ? 'delete' :
                         null;
 
-        return this.http[method](this.BASE_URL, data)
+        return this.http[method](this.baseUrl + this.url, data)
             .map((response: any) => response.json());
 
-        //.map(({ Data, Total, AggregateResults }) => {// Process the response
-        //    console.log(Data, Total);
-        //    this.originalData = cloneData(Data);
+        //TODO
+    }
 
-        //    return (<GridDataResult>{
-        //        // If there are groups, convert them to a compatible format
-        //        data: hasGroups ? translateDataSourceResultGroups(Data) : Data,
-        //        total: Total,
-        //        // Convert the aggregates if such exist
-        //        aggregateResult: translateAggregateResults(AggregateResults)
+    private itemIndex(item: any, data: any[]): number {
+        for (let idx = 0; idx < data.length; idx++) {
+            if (data[idx][this.idField] === item[this.idField]) {
+                return idx;
+            }
+        }
 
-        //    });
-        //});
+        return -1;
+    }
+
+    private cloneData(data: any[]) {
+        return data.map(item => Object.assign({}, item));
     }
 }

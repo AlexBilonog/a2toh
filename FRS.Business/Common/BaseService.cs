@@ -1,4 +1,4 @@
-﻿using EventManager.Common;
+﻿using FRS.Common;
 using FRS.Common.Contracts;
 using Kendo.Mvc;
 using Kendo.Mvc.Extensions;
@@ -103,8 +103,8 @@ namespace FRS.Business.Common
 
         private void AddDefaultSort(DataSourceRequest request)
         {
-            if (!request.Sorts.Any())
-                request.Sorts.Add(new SortDescriptor("Id", ListSortDirection.Descending));
+            if (request.Sorts == null && !request.Sorts.Any())
+                request.Sorts = new List<SortDescriptor> { new SortDescriptor("Id", ListSortDirection.Descending) };
         }
 
         protected IEnumerable<TDto> CreateEntitiesForGrid<TEntity, TDto>(IEnumerable<TDto> dtos) where TEntity : class, IEntity

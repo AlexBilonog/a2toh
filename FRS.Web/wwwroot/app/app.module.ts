@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,9 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 //import { InMemoryDataService } from './in-memory-data.service';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { GridModule } from '@progress/kendo-angular-grid';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { JsonpModule } from '@angular/http';
 import { GridService } from './common/grid.service';
-import { Grid2Service } from './common/grid2.service';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './hero/dashboard.component';
@@ -25,12 +26,15 @@ import { ProductsComponent } from './products/products.component';
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
+        ReactiveFormsModule,
         AppRoutingModule,
         HttpModule,
         //InMemoryWebApiModule.forRoot(InMemoryDataService),
         ButtonsModule,
         GridModule,
+        DropDownsModule,
         JsonpModule
     ],
     declarations: [
@@ -44,8 +48,7 @@ import { ProductsComponent } from './products/products.component';
     ],
     providers: [
         HeroService,
-        GridService,
-        Grid2Service
+        GridService
     ],
     bootstrap: [AppComponent]
 })

@@ -1,14 +1,49 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using FRS.Common.Contracts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EventManager.Common
+namespace FRS.Common
 {
-    public static class AutomapperExtensions
+    public static class AutoMapperHelper
     {
+        public static void Configure()
+        {
+            Mapper.Initialize(c => { });
+
+            var types = AppDomain.CurrentDomain.GetAssemblies().Where(a => a.FullName.Contains("FRS"))
+                .SelectMany(a => a.GetTypes())
+                .Where(t => !t.IsAbstract && !t.IsInterface)
+                .ToList();
+
+            var defaultProfiles = types
+                .Select(t => new
+                {
+                    Type1 = t,
+                    Type2 = t.GetInterfaces()
+                        .FirstOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMapsFrom<>))
+                        ?.GetGenericArguments()[0]
+                })
+                .Where(r => r.Type2 != null);
+
+            var customProfiles = types
+                .Where(t => t.GetInterfaces().Any(i => i == typeof(IHasCustomMapping)))
+                .Select(t => (IHasCustomMapping)Activator.CreateInstance(t));
+
+            foreach (var profile in defaultProfiles)
+            {
+                Mapper.Initialize(c => c.CreateMap(profile.Type1, profile.Type2).ReverseMap());
+            }
+
+            foreach (var profile in customProfiles)
+            {
+                Mapper.Initialize(c => profile.ConfigureMapping(c));
+            }
+        }
+
         public static TDestination Map<TDestination>(this object source)
         {
             var sourceType = source.GetType();
