@@ -15,11 +15,7 @@ namespace FRS.Common
         private static bool IsRecreate { get; set; }
         private static IApplicationBuilder ApplicationBuilder { get; set; }
         private static Action<DbContext> SeedAction { get; set; }
-
         private static string ConnectionString { get; set; }
-        private static string ConnectionStringWithoutCatalog { get; set; }
-        private static string DataSourcePart { get; set; }
-        private static string CatalogPart { get; set; }
         private static string Catalog { get; set; }
         private static string UserId { get; set; }
         private static string Password { get; set; }
@@ -41,7 +37,7 @@ namespace FRS.Common
             IsActive = true;
             IsRecreate = (args.ElementAtOrDefault(1) == "1");
             if (IsRecreate)
-                WriteLine(nameof(IsRecreate) + ": true", ConsoleColor.Red);
+                WriteLine("Is Recreate: True", ConsoleColor.Red);
 
             if (IsActive)
                 SetEnvironmentVariable();
@@ -91,23 +87,21 @@ namespace FRS.Common
         {
             var parts = connectionString.Split(';');
 
-            DataSourcePart = parts.Single(r => r.ToLower().StartsWith("data source"));
-            WriteLine(nameof(DataSourcePart) + ": " + DataSourcePart);
+            var dataSourcePart = parts.Single(r => r.ToLower().StartsWith("data source"));
+            WriteLine("Data Source: " + dataSourcePart);
 
-            CatalogPart = parts.Single(r => r.ToLower().StartsWith("initial catalog"));
-            WriteLine(nameof(CatalogPart) + ": " + CatalogPart);
+            var catalogPart = parts.Single(r => r.ToLower().StartsWith("initial catalog"));
+            WriteLine("Catalog: " + catalogPart);
 
-            Catalog = CatalogPart.Split('=').Last();
+            Catalog = catalogPart.Split('=').Last();
 
             UserId = parts.SingleOrDefault(r => r.ToLower().StartsWith("user id"))?.Split('=')[1];
-            WriteLine(nameof(UserId) + ": " + UserId);
+            WriteLine("User Id: " + UserId);
 
             Password = parts.SingleOrDefault(r => r.ToLower().StartsWith("password"))?.Split('=')[1];
-            WriteLine(nameof(Password) + ": " + Password);
+            WriteLine("Password: " + Password);
 
-            ConnectionStringWithoutCatalog = DataSourcePart + ";integrated security=SSPI";
-
-            ConnectionString = DataSourcePart + ";" + CatalogPart + ";integrated security=SSPI";
+            ConnectionString = dataSourcePart + ";" + catalogPart + ";integrated security=SSPI";
             connectionString = ConnectionString;
         }
 
@@ -120,8 +114,6 @@ namespace FRS.Common
                     return;
             }
 
-            var exists = CheckIfDatabaseExists();
-
             if (IsRecreate)
             {
                 DropDatabase();
@@ -130,9 +122,19 @@ namespace FRS.Common
             RunMigrate();
             RunSeed();
 
-            if ((!exists || IsRecreate) && UserId != null && Password != null)
+            if (UserId != null && Password != null)
             {
-                CreateLoginAndUser();
+                CreateLoginAndUserIfNotExist();
+            }
+        }
+
+        private static void DropDatabase()
+        {
+            WriteLine("\nDropping database...");
+            using (var serviceScope = ApplicationBuilder.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            using (var context = serviceScope.ServiceProvider.GetService<DbContext>())
+            {
+                context.Database.EnsureDeleted();
             }
         }
 
@@ -156,44 +158,9 @@ namespace FRS.Common
             }
         }
 
-        private static bool CheckIfDatabaseExists()
+        private static void CreateLoginAndUserIfNotExist()
         {
-            WriteLine("\nChecking if database exists...");
-            using (var con = new SqlConnection(ConnectionStringWithoutCatalog))
-            {
-                con.Open();
-                using (var command = con.CreateCommand())
-                {
-                    command.CommandText = $"SELECT count(*) FROM sys.databases WHERE name='{Catalog}'";
-                    var count = (int)command.ExecuteScalar();
-                    return count > 0;
-                }
-            }
-        }
-
-        private static void DropDatabase()
-        {
-            WriteLine("\nDropping database...");
-            using (var con = new SqlConnection(ConnectionStringWithoutCatalog))
-            {
-                con.Open();
-                using (var command = con.CreateCommand())
-                {
-                    command.CommandText = $@"
-IF EXISTS (select * from sys.databases where name='{Catalog}')
-BEGIN
-    ALTER DATABASE [{Catalog}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE
-
-    DROP DATABASE [{Catalog}]
-END";
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-
-        private static void CreateLoginAndUser()
-        {
-            WriteLine("\nCreating login (if not exist) and user...");
+            WriteLine("\nCreating login and user (if not exist)...");
             using (var con = new SqlConnection(ConnectionString))
             {
                 con.Open();
@@ -205,9 +172,13 @@ BEGIN
     CREATE LOGIN [{UserId}] WITH PASSWORD=N'{Password}', DEFAULT_DATABASE=[{Catalog}], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
 END
 
-CREATE USER [{UserId}] FOR LOGIN [{UserId}]
+IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = '{UserId}' and type = 'S')
+BEGIN
+    CREATE USER [{UserId}] FOR LOGIN [{UserId}]
+END
 
-ALTER ROLE [db_owner] ADD MEMBER [{UserId}]";
+ALTER ROLE [db_datareader] ADD MEMBER [{UserId}]
+ALTER ROLE [db_datawriter] ADD MEMBER [{UserId}]";
                     command.ExecuteNonQuery();
                 }
             }
