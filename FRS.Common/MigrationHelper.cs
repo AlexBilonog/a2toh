@@ -31,19 +31,22 @@ namespace FRS.Common
 
             if (args[0] != "migrate" || args.Length == 2 && args[1] != "1" || args.Length > 2)
             {
-                Console.WriteLine("Possible arguments:");
-                Console.WriteLine("\tmigrate - apply migrations");
-                Console.WriteLine("\tmigrate 1 - recreate db and apply migrations");
+                WriteLine("Possible arguments:");
+                WriteLine("\tmigrate - apply migrations");
+                WriteLine("\tmigrate 1 - recreate db and apply migrations");
                 args = new string[0];
                 return;
             }
 
             IsActive = true;
             IsRecreate = (args.ElementAtOrDefault(1) == "1");
-            args = new string[0];
+            if (IsRecreate)
+                WriteLine(nameof(IsRecreate) + ": " + IsRecreate, ConsoleColor.Red);
 
             if (IsActive)
                 SetEnvironmentVariable();
+
+            args = new string[0];
         }
 
         private static void SetEnvironmentVariable()
@@ -68,7 +71,14 @@ namespace FRS.Common
                 }
             }
 
-            Console.WriteLine("Environment: " + Environment.GetEnvironmentVariable(environmentVariable));
+            WriteLine("Environment: " + Environment.GetEnvironmentVariable(environmentVariable), ConsoleColor.Yellow);
+        }
+
+        private static void WriteLine(string text, ConsoleColor color = ConsoleColor.Gray)
+        {
+            Console.ForegroundColor = color;
+            Console.WriteLine(text);
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         public static void Init(IApplicationBuilder applicationBuilder, Action<DbContext> seedAction)
@@ -82,18 +92,18 @@ namespace FRS.Common
             var parts = connectionString.Split(';');
 
             DataSourcePart = parts.Single(r => r.ToLower().StartsWith("data source"));
-            Console.WriteLine(nameof(DataSourcePart) + ": " + DataSourcePart);
+            WriteLine(nameof(DataSourcePart) + ": " + DataSourcePart);
 
             CatalogPart = parts.Single(r => r.ToLower().StartsWith("initial catalog"));
-            Console.WriteLine(nameof(CatalogPart) + ": " + CatalogPart);
+            WriteLine(nameof(CatalogPart) + ": " + CatalogPart);
 
             Catalog = CatalogPart.Split('=').Last();
 
             UserId = parts.SingleOrDefault(r => r.ToLower().StartsWith("user id"))?.Split('=')[1];
-            Console.WriteLine(nameof(UserId) + ": " + UserId);
+            WriteLine(nameof(UserId) + ": " + UserId);
 
             Password = parts.SingleOrDefault(r => r.ToLower().StartsWith("password"))?.Split('=')[1];
-            Console.WriteLine(nameof(Password) + ": " + Password);
+            WriteLine(nameof(Password) + ": " + Password);
 
             ConnectionStringWithoutCatalog = DataSourcePart + ";integrated security=SSPI";
 
@@ -105,10 +115,8 @@ namespace FRS.Common
         {
             if (Environment.UserInteractive)
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Press 'Enter' to continue...");
-                Console.ForegroundColor = ConsoleColor.Gray;
-                if (Console.ReadKey().Key != ConsoleKey.Enter)
+                WriteLine("Press 'Space' to continue...", ConsoleColor.Yellow);
+                if (Console.ReadKey().Key != ConsoleKey.Spacebar)
                     return;
             }
 
@@ -116,14 +124,6 @@ namespace FRS.Common
 
             if (IsRecreate)
             {
-                if (Environment.UserInteractive)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Are you sure you want to recreate the database? (y/n)");
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    if (Console.ReadKey().Key != ConsoleKey.Y)
-                        return;
-                }
                 DropDatabase();
             }
 
@@ -138,7 +138,7 @@ namespace FRS.Common
 
         private static void RunMigrate()
         {
-            Console.WriteLine("\nApplying migrations...");
+            WriteLine("\nApplying migrations...");
             using (var serviceScope = ApplicationBuilder.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             using (var context = serviceScope.ServiceProvider.GetService<DbContext>())
             {
@@ -148,7 +148,7 @@ namespace FRS.Common
 
         private static void RunSeed()
         {
-            Console.WriteLine("\nApplying seed...");
+            WriteLine("\nApplying seed...");
             using (var serviceScope = ApplicationBuilder.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             using (var context = serviceScope.ServiceProvider.GetService<DbContext>())
             {
@@ -158,7 +158,7 @@ namespace FRS.Common
 
         private static bool CheckIfDatabaseExists()
         {
-            Console.WriteLine("\nChecking if database exists...");
+            WriteLine("\nChecking if database exists...");
             using (var con = new SqlConnection(ConnectionStringWithoutCatalog))
             {
                 con.Open();
@@ -173,7 +173,7 @@ namespace FRS.Common
 
         private static void DropDatabase()
         {
-            Console.WriteLine("\nDropping database...");
+            WriteLine("\nDropping database...");
             using (var con = new SqlConnection(ConnectionStringWithoutCatalog))
             {
                 con.Open();
@@ -193,7 +193,7 @@ END";
 
         private static void CreateLoginAndUser()
         {
-            Console.WriteLine("\nCreating login (if needed) and user...");
+            WriteLine("\nCreating login (if needed) and user...");
             using (var con = new SqlConnection(ConnectionString))
             {
                 con.Open();
@@ -205,9 +205,9 @@ BEGIN
     CREATE LOGIN [{UserId}] WITH PASSWORD=N'{Password}', DEFAULT_DATABASE=[{Catalog}], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
 END
 
-CREATE USER [frs_admin] FOR LOGIN [{UserId}]
+CREATE USER [{UserId}] FOR LOGIN [{UserId}]
 
-ALTER ROLE [db_owner] ADD MEMBER [frs_admin]";
+ALTER ROLE [db_owner] ADD MEMBER [{UserId}]";
                     command.ExecuteNonQuery();
                 }
             }
