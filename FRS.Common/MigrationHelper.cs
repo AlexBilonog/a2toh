@@ -193,7 +193,7 @@ END";
 
         private static void CreateLoginAndUser()
         {
-            WriteLine("\nCreating login (if needed) and user...");
+            WriteLine("\nCreating login (if not exist) and user...");
             using (var con = new SqlConnection(ConnectionString))
             {
                 con.Open();
