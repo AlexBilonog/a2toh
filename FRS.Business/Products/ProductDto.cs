@@ -12,7 +12,7 @@ namespace FRS.Business.Products
         public int UnitsInStock { get; set; }
         public int UnitPrice { get; set; }
 
-        public void ConfigureMapping(IMapperConfigurationExpression config)
+        public void ConfigureMapping(IProfileExpression config)
         {
             config.CreateMap<Product, ProductDto>()
                 .ForMember(e => e.ProductId, opt => opt.MapFrom(d => d.Id))

@@ -12,9 +12,11 @@ namespace FRS.Common
     {
         public static void Configure()
         {
-            Mapper.Initialize(c => { });
+            var solutionName = "FRS";
 
-            var types = AppDomain.CurrentDomain.GetAssemblies().Where(a => a.FullName.Contains("FRS"))
+            Mapper.Initialize(c => { }); // Needed if no types found
+
+            var types = AppDomain.CurrentDomain.GetAssemblies().Where(a => a.FullName.Contains(solutionName))
                 .SelectMany(a => a.GetTypes())
                 .Where(t => !t.IsAbstract && !t.IsInterface)
                 .ToList();

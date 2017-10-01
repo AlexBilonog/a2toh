@@ -4,6 +4,6 @@ namespace FRS.Common.Contracts
 {
     public interface IHasCustomMapping
     {
-        void ConfigureMapping(IMapperConfigurationExpression config);
+        void ConfigureMapping(IProfileExpression config);
     }
 }

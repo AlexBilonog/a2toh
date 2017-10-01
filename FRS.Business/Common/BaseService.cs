@@ -103,7 +103,7 @@ namespace FRS.Business.Common
 
         private void AddDefaultSort(DataSourceRequest request)
         {
-            if (request.Sorts == null && !request.Sorts.Any())
+            if (request.Sorts == null || !request.Sorts.Any())
                 request.Sorts = new List<SortDescriptor> { new SortDescriptor("Id", ListSortDirection.Descending) };
         }
 
