@@ -73,3 +73,20 @@ nav a {
 * {
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.k-filtercell .k-filtercell-operator > .k-button:not(.k-clear-button-visible) {
+    display: none;
+}
+
+.k-filtercell.k-filtercell-boolean .k-filtercell-wrapper {
+    padding-right: 0;
+    //margin-right: -4px;
+}
+
+.k-filtercell .k-numerictextbox .k-select {
+    display: none;
+}
+
+.k-filter-row th {
+    padding: 3px;
+}

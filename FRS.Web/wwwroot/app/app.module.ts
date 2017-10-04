@@ -22,6 +22,7 @@ import { HeroDetailComponent2 } from './hero/hero-detail2.component';
 import { HeroService } from './hero/hero.service';
 import { HeroSearchComponent } from './hero/hero-search.component';
 import { ProductsComponent } from './products/products.component';
+import { DropDownListFilterComponent } from './products/dropdownlist-filter.component';
 
 @NgModule({
     imports: [
@@ -44,7 +45,8 @@ import { ProductsComponent } from './products/products.component';
         HeroDetailComponent,
         HeroDetailComponent2,
         HeroSearchComponent,
-        ProductsComponent
+        ProductsComponent,
+        DropDownListFilterComponent
     ],
     providers: [
         HeroService,

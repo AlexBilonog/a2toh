@@ -19,6 +19,7 @@ namespace FRS.Common
         private static string Catalog { get; set; }
         private static string UserId { get; set; }
         private static string Password { get; set; }
+        private static DbContext Context { get; set; }
 
         public static void ReadArguments(ref string[] args)
         {
@@ -38,11 +39,11 @@ namespace FRS.Common
 
             IsActive = true;
             IsRecreate = (args.ElementAtOrDefault(1) == "1");
+
             if (IsRecreate)
                 WriteLine("Is Recreate: True", ConsoleColor.Red);
 
-            if (IsActive)
-                SetEnvironmentVariable();
+            SetEnvironmentVariable();
 
             args = new string[0];
         }
@@ -87,20 +88,20 @@ namespace FRS.Common
 
         public static void ConvertToIntegratedSecurity(ref string connectionString)
         {
-            var parts = connectionString.Split(';');
+            var parts = connectionString.Split(';').Select(r => r.Trim().ToLower());
 
-            var dataSourcePart = parts.Single(r => r.ToLower().StartsWith("data source"));
+            var dataSourcePart = parts.Single(r => r.StartsWith("data source"));
             WriteLine("Data Source: " + dataSourcePart);
 
-            var catalogPart = parts.Single(r => r.ToLower().StartsWith("initial catalog"));
+            var catalogPart = parts.Single(r => r.StartsWith("initial catalog"));
             WriteLine("Catalog: " + catalogPart);
 
             Catalog = catalogPart.Split('=').Last();
 
-            UserId = parts.SingleOrDefault(r => r.ToLower().StartsWith("user id"))?.Split('=')[1];
+            UserId = parts.SingleOrDefault(r => r.StartsWith("user id"))?.Split('=')[1];
             WriteLine("User Id: " + UserId);
 
-            Password = parts.SingleOrDefault(r => r.ToLower().StartsWith("password"))?.Split('=')[1];
+            Password = parts.SingleOrDefault(r => r.StartsWith("password"))?.Split('=')[1];
             WriteLine("Password: " + Password);
 
             ConnectionString = dataSourcePart + ";" + catalogPart + ";integrated security=SSPI";
@@ -116,48 +117,40 @@ namespace FRS.Common
                     return;
             }
 
-            if (IsRecreate)
+            using (var serviceScope = ApplicationBuilder.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            using (Context = serviceScope.ServiceProvider.GetService<DbContext>())
             {
-                DropDatabase();
-            }
+                if (IsRecreate)
+                {
+                    DropDatabase();
+                }
 
-            RunMigrate();
-            RunSeed();
+                RunMigrate();
+                RunSeed();
 
-            if (UserId != null && Password != null)
-            {
-                CreateLoginAndUserIfNotExist();
+                if (UserId != null && Password != null)
+                {
+                    CreateLoginAndUserIfNotExist();
+                }
             }
         }
 
         private static void DropDatabase()
         {
             WriteLine("\nDropping database...");
-            using (var serviceScope = ApplicationBuilder.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            using (var context = serviceScope.ServiceProvider.GetService<DbContext>())
-            {
-                context.Database.EnsureDeleted();
-            }
+            Context.Database.EnsureDeleted();
         }
 
         private static void RunMigrate()
         {
             WriteLine("\nApplying migrations...");
-            using (var serviceScope = ApplicationBuilder.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            using (var context = serviceScope.ServiceProvider.GetService<DbContext>())
-            {
-                context.Database.Migrate();
-            }
+            Context.Database.Migrate();
         }
 
         private static void RunSeed()
         {
             WriteLine("\nApplying seed...");
-            using (var serviceScope = ApplicationBuilder.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            using (var context = serviceScope.ServiceProvider.GetService<DbContext>())
-            {
-                SeedAction(context);
-            }
+            SeedAction(Context);
         }
 
         private static void CreateLoginAndUserIfNotExist()
