@@ -13,11 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\systemjs.config.js" />
-    <Content Include="wwwroot\systemjs-angular-loader.js" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
   </ItemGroup>
 
