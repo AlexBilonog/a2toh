@@ -18,22 +18,6 @@ import { FilterService, BaseFilterCellComponent } from '@progress/kendo-angular-
     </kendo-dropdownlist>
 </ng-template>`
 })
-/*[filter]="filter"
-        <ng-template kendoGridFilterCellTemplate let-filter>
-        <my-dropdown-filter [filter]="filter"
-                            [data]="categories"
-                            textField="Name"
-                            valueField="Id">
-        </my-dropdown-filter>
-    </ng-template>
-    <ng-template kendoGridCellTemplate let-dataItem>{{category(dataItem.CategoryId)?.Name}}</ng-template>
-    <ng-template kendoGridEditTemplate let-dataItem="dataItem" let-formGroup="formGroup">
-        <kendo-dropdownlist [data]="categories" textField="Name" valueField="Id"
-                            [valuePrimitive]="true" [formControl]="formGroup.get('CategoryId')">
-        </kendo-dropdownlist>
-    </ng-template>
-
-*/
 export class DropDownListFilterComponent extends BaseFilterCellComponent {
 
     public get selectedValue(): any {
